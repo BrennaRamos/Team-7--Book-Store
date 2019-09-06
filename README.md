@@ -7,6 +7,7 @@ Once Sprint 2 comes around, we should make a new branch of updated master and ca
 Following this process for sprints 3 4 and 5 would prove useful.
 Please follow the link below if you would like a short tutorial on Github functions:
 https://guides.github.com/activities/hello-world/
+Important note: Please do not delete branches when commits are merged to the master. This is so that we can keep a historical of all the work we did throughout the semester. As time passes, if they become unecessary then we can all agree on deleting extraneous branches or anything else
 
 If my understanding of how Github repositories works is incorrect or inaccurate, please feel free to update this README file with the right steps we should take :)
 ---------------Brenna, 09/06/2019
