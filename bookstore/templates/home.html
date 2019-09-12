@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+            <h1 class="display-4">Bookstore - Home</h1>
+            <p class="lead">Welcome to the team 7 bookstore!</p>
+        </div>
+    </div>
+
+    {% for post in posts %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Posted by: {{ post.author }} on {{ post.date_posted }}</h6>
+                <p class="card-text">{{ post.content }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
+    
+{% endblock content %}
