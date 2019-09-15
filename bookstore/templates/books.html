@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block content %}
+
+    <ul class="list-group"></ul>
+
+        {% for post in posts %}
+
+            <li class="list-group-item">
+                <span class="font-weight-bold">
+                    {{ post.title }}
+                </span>
+
+                by {{ post.author }} 
+                
+                <small class="text-right font-weight-light">
+                    Published on {{ post.datePublished }}
+                </small>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+    
+{% endblock content %}
