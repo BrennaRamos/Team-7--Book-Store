@@ -23,7 +23,7 @@ def books(request):
         'posts':posts,
         'title':'Books'
     }
-
+    return render(request,'books.html',context)
 # Placeholder Views
 #def book(request):
     #return render(request,'book_detail.html',{'title':'Book Details'})
