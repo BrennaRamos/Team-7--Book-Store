@@ -16,14 +16,26 @@ posts = [
 ]
 
 # Create your views here.
+<<<<<<< Updated upstream
 def home(request):
     return render(request,'home.html')
+=======
+>>>>>>> Stashed changes
 def books(request):
     context  = {
         'posts':posts,
         'title':'Books'
     }
+<<<<<<< Updated upstream
     return render(request,'books.html',context)
+=======
+    return render(request,'books/books.html',context)
+
+def cart(request):
+    return render(request,'cart.html',{'title':'Cart'})
+
+
+>>>>>>> Stashed changes
 # Placeholder Views
 #def book(request):
     #return render(request,'book_detail.html',{'title':'Book Details'})

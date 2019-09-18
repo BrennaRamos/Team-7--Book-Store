@@ -3,7 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='bookstore-home'),
+<<<<<<< Updated upstream
     path('books/', views.books, name='bookstore-books')
+=======
+    path('books/', views.books, name='bookstore-books'),
+>>>>>>> Stashed changes
 ]
 
  # These paths are placeholders as ideas
