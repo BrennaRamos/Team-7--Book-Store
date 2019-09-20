@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from reviews import views as reviews_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include ('bookstore.urls')),
     path('', include ('cart.urls')),
+    path('', include ('reviews.urls')),
 ]

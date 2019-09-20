@@ -15,15 +15,6 @@ def books(request):
     }
     return render(request,'books.html', context)
 
-def createReview(request):
-    context  = {
-        'title':'Create Review'
-    }
-    return render(request,'create-review.html', context)
-
-class ReviewListView(ListView):
-    model = Review
-
 # Placeholder Views
 #def book(request):
     #return render(request,'book_detail.html',{'title':'Book Details'})
