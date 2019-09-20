@@ -13,10 +13,13 @@ def books(request):
         'posts': Book.objects.all(),
         'title':'Books'
     }
-    return render(request,'books.html',context)
+    return render(request,'books.html', context)
 
 def createReview(request):
-    return render(request,'create-review.html')
+    context  = {
+        'title':'Create Review'
+    }
+    return render(request,'create-review.html', context)
 
 class ReviewListView(ListView):
     model = Review
