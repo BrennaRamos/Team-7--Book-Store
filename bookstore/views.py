@@ -1,29 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-posts = [
-    {
-        'title':'Book 1',
-        'author':'James Doe',
-        'datePublished':'August 1, 2019'
-    },
-    
-    {
-        'title':'Book 2',
-        'author':'Jane Doe',
-        'datePublished':'August 2, 2019'
-    }
-]
+from .models import Book
+from .models import Review
+from django.views.generic import ListView
 
 # Create your views here.
 def home(request):
     return render(request,'home.html')
+
 def books(request):
     context  = {
-        'posts':posts,
+        'posts': Book.objects.all(),
         'title':'Books'
     }
     return render(request,'books.html',context)
+
+def createReview(request):
+    return render(request,'create-review.html')
+
+class ReviewListView(ListView):
+    model = Review
+
 # Placeholder Views
 #def book(request):
     #return render(request,'book_detail.html',{'title':'Book Details'})

@@ -3,18 +3,21 @@
 
     <ul class="list-group"></ul>
 
-        {% for post in posts %}
+        {% for book in posts %}
 
             <li class="list-group-item">
                 <span class="font-weight-bold">
-                    {{ post.title }}
+                    {{ book.title }}
                 </span>
 
-                by {{ post.author }} 
+                by {{ book.author }} 
                 
                 <small class="text-right font-weight-light">
-                    Published on {{ post.datePublished }}
+                    Published on {{ book.datePublished }}
                 </small>
+                <form action="/create-review/">
+                    <input type="submit" name="Create Customer Review" value="Create Customer Review"></input>
+                </form> 
             </li>
 
         {% endfor %}
