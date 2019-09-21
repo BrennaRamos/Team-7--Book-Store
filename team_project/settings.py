@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'wishlist.apps.WishlistConfig',
     'reviews.apps.ReviewsConfig',
     'bookstore.apps.BookstoreConfig',
