@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'wishlist.apps.WishlistConfig',
     'reviews.apps.ReviewsConfig',
     'bookstore.apps.BookstoreConfig',
     'django.contrib.admin',
