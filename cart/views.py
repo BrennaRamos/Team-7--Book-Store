@@ -25,7 +25,7 @@ def cart_home(request):
 
 
 def add_to_cart(request, book_id):
-    request.session.set_expiry(5000)   
+    request.session.set_expiry(5000000)   
     
     if 'my_cart' not in request.session:
         create_new_cart = Cart()
