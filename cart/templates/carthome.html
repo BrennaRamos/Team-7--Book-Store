@@ -1,9 +1,27 @@
 
 
+
 {% extends 'base.html' %}
 
 {% block content %}
 
-<h1>This is the shopping cart page</h1>
+<h1>Welcome!</h1>
+
+{% if emptycart %}
+
+<h3>Your cart is empty :(</h3>
+
+{% else %}
+
+<h3>Items in your cart:</h3>
+
+{% for book in nonemptycart.items.all %}
+<li> <b>Title:</b> {{book}} <b>Price:</b> {{book.price}} <a href="{% url 'removefromcart' book.id %}">Remove</a></p></li></li>
+
+{% endfor %}
+
+<h4>Total: {{nonemptycart.total}}</h4>
+
+{% endif %}
 
 {% endblock %}
