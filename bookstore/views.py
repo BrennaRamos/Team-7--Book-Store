@@ -6,14 +6,14 @@ from django.views.generic import ListView
 
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    return render(request,'bookstore/home.html')
 
 def books(request):
     context  = {
         'posts': Book.objects.all(),
         'title':'Books'
     }
-    return render(request,'books.html', context)
+    return render(request,'bookstore/books.html', context)
 
 # Placeholder Views
 #def book(request):
