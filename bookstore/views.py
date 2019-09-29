@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book
-from .models import Review
 from django.views.generic import ListView
 
 # Create your views here.
