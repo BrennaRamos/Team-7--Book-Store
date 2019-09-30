@@ -38,3 +38,10 @@ class Book(models.Model):
 
 	def __str__(self):
 		return self.title
+
+class Book_User(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return '{}-{}'.format(self.book.title, str(self.user.username))
