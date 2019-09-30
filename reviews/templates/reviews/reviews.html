@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+	<h1>Create a Review for {{ book_title }}!</h1>
+	<form method="post">
+		{% csrf_token %}
+		{{ review_form.as_p}}
+		<input type="submit" value="Submit" class="btn btn-outline-success">
+	</form>
+	<div class="main-content-section">
+		{{ reviews.count }} Review{{ reviews|pluralize }}
+		{% for review in reviews %}
+			<blockquote class="blockquote">
+				<p class="mb-0">{{ review.content }}</p>
+				<footer class="blockquote-footer"> by <cite title="Source Title">{{ review.author|capfirst }}</cite></footer>
+			</blockquote>
+    	{% endfor %}
+    </div>
+{% endblock content %}
