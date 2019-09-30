@@ -39,6 +39,7 @@ class Book(models.Model):
 	def __str__(self):
 		return self.title
 
+# Book_User hold the history of books purchased by users.
 class Book_User(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
