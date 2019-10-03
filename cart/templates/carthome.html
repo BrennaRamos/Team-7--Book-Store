@@ -9,18 +9,29 @@
 
 {% if emptycart %}
 
-<h3>Your cart is empty :(</h3>
+<h2>Your cart is empty :(</h2>
 
 {% else %}
 
 <h3>Items in your cart:</h3>
+<p></p>
 
-{% for book in nonemptycart.items.all %}
-<li> <b>Title:</b> {{book}} <b>Price:</b> {{book.price}} <a href="{% url 'removefromcart' book.id %}">Remove</a></p></li></li>
+    <table class='table'>
+        
+            {% for book in nonemptycart.items.all %}
+            <tr>
+            <td><h4><font color="green"> {{book}} </h4></font> <b>Author:</b> {{book.author}}</td>
+            <td>Quantity: 1</td>
+            <td><b>Price:</b> $ {{book.price}}</td>
+            <td><a href="{% url 'removefromcart' book.id %}">Remove</a></td>
+            </tr>
+            {% endfor %} 
 
-{% endfor %}
+    </table>
 
-<h4>Total: {{nonemptycart.total}}</h4>
+<p></p>
+
+<h4 align="right"><font color="green">Total:</font> $ {{nonemptycart.total}}</h4>
 
 {% endif %}
 
