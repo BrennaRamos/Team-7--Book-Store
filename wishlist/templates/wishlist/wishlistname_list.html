@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Wishlist view!</h2>
+    <ol>
+        {% for wishlistname in object_list %}
+            <li>{{ wishlistname.wish_list_name_0 }}<ol>
+                {% for wishlistentrie in view.entries %}
+                    {% if wishlistentrie.home == '0' %}
+                        <li>{{ wishlistentrie.book }}</li>
+                    {% endif %}
+                {% endfor %}</ol></li>
+
+            {% if wishlistname.wish_list_name_1 != null %}
+                <li>{{ wishlistname.wish_list_name_1 }}<ol>
+                {% for wishlistentrie in view.entries %}
+                    {% if wishlistentrie.home == '1' %}
+                        <li>{{ wishlistentrie.book }}</li>
+                    {% endif %}
+                {% endfor %}</ol></li>
+            {% endif %}
+
+            {% if wishlistname.wish_list_name_2 != null %}
+                <li>{{ wishlistname.wish_list_name_2 }}<ol>
+                {% for wishlistentrie in view.entries %}
+                    {% if wishlistentrie.home == '2' %}
+                        <li>{{ wishlistentrie.book }}</li>
+                    {% endif %}
+                {% endfor %}</ol></li>
+            {% endif %}
+
+        {% endfor %}
+
+    </ol>
+{% endblock content %}
