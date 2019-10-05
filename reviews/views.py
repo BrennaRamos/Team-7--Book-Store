@@ -24,10 +24,9 @@ def reviews(request, id, title):
 				return HttpResponseRedirect(request.path_info)
 			else:
 				messages.warning(request, "You must purchase this book in order to review it.")
-				review_form= ReviewForm()
 		else:
 			messages.warning(request, "You must be logged in to write a review.")
-			review_form= ReviewForm()
+			review_form = ReviewForm(request.POST or None)
 	else:
 		review_form= ReviewForm()
 

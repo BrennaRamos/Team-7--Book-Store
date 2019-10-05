@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="review-wrap">
 	<h1>Create a Review for {{ book_title }}!</h1>
-	<div class="form-group">
+	<div>
 		{% if messages %}
 		<ul classs="messages">
 			{% for message in messages %}
@@ -13,22 +14,22 @@
 		{% endif %}
 	</div>
 
-	<form method="post">
+	<form method="post" class="review-form-group">
 		{% csrf_token %}
 		{{ review_form.as_p}}
-		<input type="submit" value="Review" class="btn btn-outline-success">
+		<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
 	</form>
 
 	<div class="main-content-section">
-		Average Rating: {{ average_rating|floatformat:2 }}
-		<br>
-		{{ reviews.count }} Review{{ reviews|pluralize }}
+		<p class="ave-rating">Average Rating: {{ average_rating|floatformat:2 }}</p>
+		<h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>
 		{% for review in reviews %}
 			<blockquote class="blockquote">
-				<p class="mb-0">Rating: {{ review.rating }} Star(s)</p>
-				<p class="mb-0">Review: {{ review.content }}</p>
+				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
+				<p class="mb-0">{{ review.content }}</p>
 				<footer class="blockquote-footer"> by <cite title="Source Title">{{ review.author|capfirst }}</cite></footer>
 			</blockquote>
     	{% endfor %}
     </div>
+</div>
 {% endblock content %}
