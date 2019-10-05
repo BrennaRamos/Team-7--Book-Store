@@ -20,10 +20,13 @@
 	</form>
 
 	<div class="main-content-section">
+		Average Rating: {{ average_rating|floatformat:2 }}
+		<br>
 		{{ reviews.count }} Review{{ reviews|pluralize }}
 		{% for review in reviews %}
 			<blockquote class="blockquote">
-				<p class="mb-0">{{ review.content }}</p>
+				<p class="mb-0">Rating: {{ review.rating }} Star(s)</p>
+				<p class="mb-0">Review: {{ review.content }}</p>
 				<footer class="blockquote-footer"> by <cite title="Source Title">{{ review.author|capfirst }}</cite></footer>
 			</blockquote>
     	{% endfor %}
