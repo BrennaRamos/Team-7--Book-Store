@@ -15,12 +15,13 @@ def reviews(request, id, title):
 			review_form = ReviewForm(request.POST or None)
 			if review_form.is_valid() and Book_User.objects.filter(book=book, user=user).exists():
 				content = request.POST.get('content')
-				review = Review.objects.create(book=book, author=user, content=content)
+				rating = request.POST.get('rating')
+				review = Review.objects.create(book=book, author=user, content=content, rating=rating)
 				review.save()
 				review_form= ReviewForm()
 				messages.success(request, "You've successfully reviewed this book.")
 			else:
-				messages.warning(request, "You must purchase a book in order to review it.")
+				messages.warning(request, "You must purchase this book in order to review it.")
 				review_form= ReviewForm()
 		else:
 			messages.warning(request, "You must be logged in to write a review.")
