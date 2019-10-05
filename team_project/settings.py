@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'crispy_forms',
     'wishlist.apps.WishlistConfig',
     'reviews.apps.ReviewsConfig',
     'bookstore.apps.BookstoreConfig',
@@ -125,3 +126,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
