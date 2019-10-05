@@ -6,12 +6,9 @@
 
         {% for book in posts %}
 
-	    <img style="width: 245px; height: 247px;"
-	    alt="Image description"
-            src="{% static 'images/BookCovers/AnimalFarm.png' %}"/>
-
             <li class="list-group-item">
-                <span class="font-weight-bold">
+                img src="{{ book.photo.url }}"
+		<span class="font-weight-bold">
                     {{ book.title }}
                 </span>
 

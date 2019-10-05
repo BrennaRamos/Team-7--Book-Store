@@ -35,6 +35,7 @@ class Book(models.Model):
 	genre = models.ForeignKey(Genre, on_delete=models.SET('Default'))
 	publisher = models.ForeignKey(Publisher, on_delete=models.SET('Default'))
 	price = models.DecimalField(max_digits=5, decimal_places=2)
+	photo = models.ImageField(upload_to="gallery")
 
 	def __str__(self):
 		return self.title
