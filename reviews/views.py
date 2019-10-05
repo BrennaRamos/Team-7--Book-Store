@@ -5,10 +5,12 @@ from .forms import *
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.db.models import Avg
 
 def reviews(request, id, title):
 	book = get_object_or_404(Book, id=id, title=title)
 	reviews = Review.objects.filter(book=book).order_by('-id')
+	average_rating = reviews.aggregate(average=Avg('rating'))
 	if request.method == 'POST':
 		user = request.user
 		if user.is_authenticated:
@@ -18,8 +20,8 @@ def reviews(request, id, title):
 				rating = request.POST.get('rating')
 				review = Review.objects.create(book=book, author=user, content=content, rating=rating)
 				review.save()
-				review_form= ReviewForm()
 				messages.success(request, "You've successfully reviewed this book.")
+				return HttpResponseRedirect(request.path_info)
 			else:
 				messages.warning(request, "You must purchase this book in order to review it.")
 				review_form= ReviewForm()
@@ -33,6 +35,7 @@ def reviews(request, id, title):
     	'title': 'Reviews',
     	'reviews': reviews,
     	'review_form': review_form,
-    	'book_title': book.title
+    	'book_title': book.title,
+    	'average_rating': average_rating['average']
     }
 	return render(request, 'reviews/reviews.html', context)

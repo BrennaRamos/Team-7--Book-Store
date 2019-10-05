@@ -20,6 +20,8 @@
 	</form>
 
 	<div class="main-content-section">
+		Average Rating: {{ average_rating|floatformat:2 }}
+		<br>
 		{{ reviews.count }} Review{{ reviews|pluralize }}
 		{% for review in reviews %}
 			<blockquote class="blockquote">
