@@ -1,9 +1,14 @@
 {% extends 'base.html'%}
 {% block content %}
+{% load staticfiles %}
 
     <ul class="list-group"></ul>
 
         {% for book in posts %}
+
+	    <img style="width: 245px; height: 247px;"
+	    alt="Image description"
+            src="{% static 'images/BookCovers/AnimalFarm.png' %}"/>
 
             <li class="list-group-item">
                 <span class="font-weight-bold">
