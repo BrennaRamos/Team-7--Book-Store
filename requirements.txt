@@ -1,5 +1,14 @@
+asgiref==0.14.0
+autobahn==0.16.0
+autopep8==1.2.4
 Django==2.2.5
+django-crispy-forms==1.7.2
+pep8==1.7.0
+Pillow==6.2.0
 pytz==2019.2
+six==1.10.0
 sqlparse==0.3.0
+txaio==2.5.1
 virtualenv==16.7.5
 virtualenvwrapper-win==1.2.5
+zope.interface==4.2.0
