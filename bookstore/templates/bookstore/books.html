@@ -32,6 +32,10 @@
     </small>
     <div>{{ book.bookDescription }}</div>
     <br>
+    <br>
+    <div class="font-weight-bold">{{ book.author }}</div>
+    <div>{{ book.author.biography }}</div>
+    <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
     <a href="{% url 'reviews' book.id book.title %}">Check Reviews</a>
     <br>
