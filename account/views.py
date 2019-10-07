@@ -16,5 +16,6 @@ def signup(request):
 
     else:    
         form = signUpForm()
-        return render(request,'account/signup.html',{'form':form})
+    
+    return render(request,'account/signup.html',{'form':form})
     

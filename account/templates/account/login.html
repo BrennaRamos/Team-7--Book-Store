@@ -9,16 +9,16 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="from-group">
-                    <legend>Sign Up</legend>
+                    <legend>Log In</legend>
                     <div class="border-top">
                             {{ form|crispy }}
-                            <button class="btn btn-outline-info mb-3" type="submit">Sign Up</button>
+                            <button class="btn btn-outline-info mb-3" type="submit">Log In</button>
                     </div>
                 </div>
 
                 <div class="border-top pt-3 mb-3">
-                    <small>Already have an account?</small>
-                    <a class="mr-3 btn btn-primary" href="">Log In</a>
+                    <small>Don't have an account?</small>
+                    <button class="mr-3 btn btn-primary">Sign Up</button>
                 </div>
             </form>
         </div>
