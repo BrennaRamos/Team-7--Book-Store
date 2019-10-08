@@ -35,7 +35,9 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img class="img-fluid" style="width: 100%;height: auto;" src="{% static 'images/books.jpg' %}" alt="Card image">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
 
             <a class="navbar-brand" href="{% url 'bookstore-home' %}"><img src="{% static 'images/logoSmall.png' %}"></a>
 
@@ -47,31 +49,34 @@
                 
                 <ul class="navbar-nav ml-auto">
 
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'login' %}">Log In</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a>
+                            <a class="dropdown-item" href="{% url 'wishlists' %}">Wishlist</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                         </div>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    {% else  %}
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'login' %}">Log In</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a>
+                            </div>
                     </li>
+                    {% endif  %}
 
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'bookstore-books' %}">Books</a>
                     </li>
 
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'cart' %}">Cart</a>
                     </li>
-
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'wishlists' %}">Wishlist</a>
-                    </li>
-
+                    {% endif %}
                 </ul>
 
             </div>
@@ -102,22 +107,8 @@
                             </div>
                         </div>
                 {% endfor %}
+
             {% endif %}
-
-            <div class="card bg-dark text-white mb-3 mt-3">
-                <img class="card-img" src="{% static 'images/books.png' %}" alt="Card image">
-                <div class="card-img-overlay">
-                    <h1 class="card-title">Team 7 Bookstore</h1>
-                    <p class="card-text">
-                        {% if title %}
-                            {{ title }}                 
-                        {% else %}
-                            GeekText
-                        {% endif %}
-                    </p>
-
-                </div>
-            </div>
 
             {% block content %}
 
