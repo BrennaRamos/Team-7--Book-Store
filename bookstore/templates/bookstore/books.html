@@ -22,19 +22,19 @@
 
 <li class="list-group-item">
     <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})">
-    <span class="font-weight-bold">
+<div> 
+<span class="font-weight-bold">
                     {{ book.title }}
                 </span>
-
+<div>
     by {{ book.author }}, {{ book.genre }}
-    <small class="text-right font-weight-light">
-        Published on {{ book.datePublished }} by {{ book.publisher }}
-    </small>
-    <div>{{ book.bookDescription }}</div>
-    <br>
-    <br>
-    <div class="font-weight-bold">{{ book.author }}</div>
-    <div>{{ book.author.biography }}</div>
+<div>
+        Published on {{ book.datePublished }}
+<div>
+<span class="font-weight-bold">
+	${{ book.price }}
+		</span>
+   
     <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
     <a href="{% url 'reviews' book.id book.title %}">Check Reviews</a>
