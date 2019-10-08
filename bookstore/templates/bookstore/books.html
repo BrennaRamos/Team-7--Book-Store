@@ -2,6 +2,21 @@
 {% block content %}
 {% load staticfiles %}
 
+<head>
+<style>
+p.ex1 {
+  border: 1px solid grey; 
+  padding: 35px;
+}
+
+p.ex2 {
+  border: 1px solid grey; 
+  margin-left: 35px;
+}
+
+</style>
+</head>
+
 <script type="text/javascript">
 
     function resizeImage(id) {
@@ -16,24 +31,30 @@
     }
 </script>
 
+<button type="button">Sort by Title</button>
+<button type="button">Sort by Author</button>
+<button type="button">Sort by Price</button> 
+<button type="button">Sort by Rating</button> 
+<button type="button">Sort by Publish Date</button> 
+
 <ul class="list-group"></ul>
 
 {% for book in posts %}
 
 <li class="list-group-item">
-    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})">
-<div> 
-<span class="font-weight-bold">
+<p class="ex1">
+    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})"> 
+	<br>
+	<span class="font-weight-bold">
                     {{ book.title }}
                 </span>
-<div>
+<br>
     by {{ book.author }}
-<div>
-	{{ book.genre }}
-<div>
+<br>   {{ book.genre }}
+<br>
         Published on {{ book.datePublished }}
-<div>
-<span class="font-weight-bold">
+<br>
+	<span class="font-weight-bold">
 	${{ book.price }}
 		</span>
    
@@ -43,7 +64,7 @@
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
     <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
-
+</p>
 </li>
 
 {% endfor %}
