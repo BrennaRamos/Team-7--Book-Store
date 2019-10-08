@@ -132,3 +132,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Support for ImageFile in models
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'bookstore-home'
