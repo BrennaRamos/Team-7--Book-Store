@@ -2,6 +2,21 @@
 {% block content %}
 {% load staticfiles %}
 
+<head>
+<style>
+p.ex1 {
+  border: 1px solid grey; 
+  padding: 35px;
+}
+
+p.ex2 {
+  border: 1px solid grey; 
+  margin-left: 35px;
+}
+
+</style>
+</head>
+
 <script type="text/javascript">
 
     function resizeImage(id) {
@@ -16,32 +31,40 @@
     }
 </script>
 
+<button type="button">Sort by Title</button>
+<button type="button">Sort by Author</button>
+<button type="button">Sort by Price</button> 
+<button type="button">Sort by Rating</button> 
+<button type="button">Sort by Publish Date</button> 
+
 <ul class="list-group"></ul>
 
 {% for book in books %}
 
 <li class="list-group-item">
-    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})">
-    <span class="font-weight-bold">
+<p class="ex1">
+    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})"> 
+	<br>
+	<span class="font-weight-bold">
                     {{ book.title }}
                 </span>
-
-    by {{ book.author }}, {{ book.genre }}
-    <small class="text-right font-weight-light">
-        Published on {{ book.datePublished }} by {{ book.publisher }}
-    </small>
-    <div>{{ book.bookDescription }}</div>
-    <br>
-    <br>
-    <div class="font-weight-bold">{{ book.author }}</div>
-    <div>{{ book.author.biography }}</div>
+<br>
+    by {{ book.author }}
+<br>   {{ book.genre }}
+<br>
+        Published on {{ book.datePublished }}
+<br>
+	<span class="font-weight-bold">
+	${{ book.price }}
+		</span>
+   
     <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
     <a href="{% url 'reviews' book.id book.title %}">Check Reviews</a>
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
     <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
-
+</p>
 </li>
 
 {% endfor %}
