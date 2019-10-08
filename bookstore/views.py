@@ -5,11 +5,15 @@ from django.views.generic import ListView
 
 # Create your views here.
 def home(request):
-    return render(request,'bookstore/home.html')
+    context  = {
+        'books': Book.objects.all(),
+        'title':'Home'
+    }
+    return render(request,'bookstore/home.html', context)
 
 def books(request):
     context  = {
-        'posts': Book.objects.all(),
+        'books': Book.objects.all(),
         'title':'Books'
     }
     return render(request,'bookstore/books.html', context)

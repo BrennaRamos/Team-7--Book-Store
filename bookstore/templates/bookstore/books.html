@@ -18,7 +18,7 @@
 
 <ul class="list-group"></ul>
 
-{% for book in posts %}
+{% for book in books %}
 
 <li class="list-group-item">
     <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})">
