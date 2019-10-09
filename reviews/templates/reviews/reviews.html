@@ -1,29 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="review-wrap">
-	<h1>Create a Review for {{ book_title }}!</h1>
+	<h1>Reviews for {{ book_title }}!</h1>
 	<div>
 		{% if messages %}
-		<ul classs="messages">
-			{% for message in messages %}
-			<li>
-				<div class="alert alert-{{message.tags}}"> {{ message }} </div>
-			</li>
-			{% endfor %}
-		</ul>
+			<ul classs="messages">
+				{% for message in messages %}
+				<li>
+					<div class="alert alert-{{message.tags}}"> {{ message }} </div>
+				</li>
+				{% endfor %}
+			</ul>
 		{% endif %}
 	</div>
+	{% if user.is_authenticated %}
+		{% if reviews.count == 0 %}
+			<p>Be the first to review this book!</p>
+		{% elif this_user_review|length == 0 %}
+			<p>Create a review!</p>
+		{% endif %}
 
-	<form method="post" class="review-form-group">
-		{% csrf_token %}
-		{{ review_form.as_p}}
-		<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
-	</form>
+		<form method="post" class="review-form-group">
+			{% csrf_token %}
+			{{ review_form.as_p}}
+			<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
+		</form>
+	{% endif %}
 
 	<div class="main-content-section">
-		<p class="ave-rating">Average Rating: {{ average_rating|floatformat:2 }}</p>
+		{% if average_rating %}
+			<p class="ave-rating">Average Rating: {{ average_rating|floatformat:2 }}</p>
+		{% endif %}
+
 		<h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>
-		{% for review in reviews %}
+		{% if this_user_review %}
+			<h3>Your review:</h3>
+			{% for this_review in this_user_review %}
+				<blockquote class="blockquote">
+						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
+						<p class="mb-0">{{ this_review.content }}</p>
+						<footer class="blockquote-footer"> by <cite title="Source Title">{{ this_review.author|capfirst }}</cite></footer>
+				</blockquote>
+			{% endfor %}
+		{% endif %}
+
+		{% if this_user_review %}
+			<h3>Other's reviews:</h3>
+		{% endif %}
+
+		{% for review in reviews_minus_this_user %}
 			<blockquote class="blockquote">
 				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
 				<p class="mb-0">{{ review.content }}</p>
