@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import redirect
 from .models import Cart
-from bookstore.models import Book
+from bookstore.models import Book, Book_User
+from django.contrib.auth.models import User
 
 def cart_home(request):
    
@@ -54,3 +55,23 @@ def remove_from_cart(request, book_id):
     cart.items.remove(book)
     cart.save()
     return redirect('cart') 
+
+def purchase_items(request):
+
+    my_cart_id = request.session['my_cart']
+    cart= Cart.objects.get(id=my_cart_id)
+    #book = Book.objects.get(id=book_id)
+    
+    user = request.user
+
+    for item in cart.items.all():
+        book = Book.objects.get(id=item.id)
+        if user.is_authenticated and not Book_User.objects.filter(book=book, user=user).exists():
+            #for item in cart.items.all():
+                new_user_book = Book_User.objects.create(user=user, book=book)
+        else:
+            continue
+    
+    del request.session['my_cart']
+    
+    return render(request, 'purchase.html')
