@@ -3,6 +3,7 @@
 
 {% block content %}
 
+    {% if user.is_authenticated == False %}
     <div class="jumbotron">
         <h1 class="display-4">Welcome!</h1>
         <hr class="my-4">
@@ -14,6 +15,7 @@
             </div>
         </p>
     </div>
+    {% endif %}
 
     <div class="text-center">
         {% for book in books %}

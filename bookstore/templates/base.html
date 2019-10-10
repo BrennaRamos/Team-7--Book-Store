@@ -51,8 +51,12 @@
 
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle border border-warning" src="{{ user.profile.profilePic.url }}" width="30" height="30" alt="">
+                             {{ user.username }}
+                        </a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                             <a class="dropdown-item" href="{% url 'wishlists' %}">Wishlist</a>
                             <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                         </div>
@@ -109,11 +113,9 @@
                 {% endfor %}
 
             {% endif %}
-
+            
             {% block content %}
-
             {% endblock content %}
-
         </div>
 
 
