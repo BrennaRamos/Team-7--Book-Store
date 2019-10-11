@@ -10,11 +10,7 @@ class Review(models.Model):
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
 	RATING_CHOICES = zip(range(1,6), range(1,6))
 	rating = models.IntegerField(choices=RATING_CHOICES, default=1)
-	ANONYMITY_CHOICES = [
-	("Username", "Username"),
-    ("Anonymous", "Anonymous"),
-    ]
-	anonymity = models.CharField(max_length=50, choices=ANONYMITY_CHOICES, default='Username')
+	anonymous = models.BooleanField(default=False)
 
 	def __str__(self):
 		return '{}-{}'.format(self.book.title, str(self.author.username))

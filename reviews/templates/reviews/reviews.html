@@ -52,7 +52,13 @@
 			<blockquote class="blockquote">
 				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
 				<p class="mb-0">{{ review.content }}</p>
-				<footer class="blockquote-footer"> by <cite title="Source Title">{{ review.author|capfirst }}</cite></footer>
+				<footer class="blockquote-footer"> by 
+					{% if review.anonymous %}
+						<cite title="Source Title">Anonymous</cite>
+					{% else %}
+						<cite title="Source Title">{{ review.author|capfirst }}</cite>
+					{% endif %}
+				</footer>
 			</blockquote>
     	{% endfor %}
     </div>
