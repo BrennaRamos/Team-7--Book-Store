@@ -9,3 +9,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return "%s" %(self.id)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default = 1)
+    quantityprice = models.DecimalField(max_digits=100, decimal_places=2, blank=True, null=True) 
+
+    def __str__(self):
+        return "%s" %(self.id)

@@ -1,9 +1,9 @@
 
 
-
 {% extends 'base.html' %}
 
 {% block content %}
+
 
 <h1>Welcome!</h1>
 
@@ -14,29 +14,54 @@
 {% else %}
 
 <h3>Items in your cart:</h3>
-<p></p>
+
+<br>
 
     <table class='table'>
         
             {% for book in nonemptycart.items.all %}
             <tr>
-            <td><h4><font color="green"> {{book}} </h4></font> <b>Author:</b> {{book.author}}</td>
-            <td>Quantity: 1</td>
-            <td><b>Price:</b> $ {{book.price}}</td>
-            <td><a href="{% url 'removefromcart' book.id %}">Remove</a></td>
+            <td>
+                <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 >
+            </td>
+            <td>
+                <h4><font color="green"> {{book}} </h4></font> <b>Author:</b> {{book.author}}
+            </td>
+            <td>
+                <b>Price:</b> $ {{book.price}}
+            </td>
+            {% for item in cartitem %}
+                {% if book.id == item.book.id and nonemptycart.id == item.cart.id %}
+            <td>   
+                <b>Quantity: </b>
+                <a href="{% url 'removebutton' book.id %}"><button style="border-color: green; color:black"> <b>-</b> </button></a> &nbsp; {{item.quantity}} &nbsp; <a href="{% url 'addbutton' book.id %}"><button style="border-color: green; color:black"> + </button></a>
+                    {% if item.quantity == 10 %}
+                    <p align="right"><font color="red">(max 10)</font></p>
+                    {% endif %}
+            </td>  
+            <td>
+                <b>Subtotal:</b> $ {{item.quantityprice}} 
+            </td>
+                {% endif %}
+            {% endfor %}
+            <td>
+                <a href="{% url 'removefromcart' book.id %}">Remove</a>
+            </td>
             </tr>
             {% endfor %} 
 
     </table>
 
-<p></p>
+<br>
 
 <h4 align="right"><font color="green">Total:</font> $ {{nonemptycart.total}}</h4>
 
-<p></p>
+<br>
+<br>
+<br>
 
+<h4 align="right"><a href="{% url 'purchaseitems' %}"><button style="background-color:orange; border-color:green; color:black" ><b>Purchase Items</b></button></a></h4>
 
-<h4 align="right"><a href="{% url 'purchaseitems' %}"><button>Purchase</button></a></h4>
 
 
 {% endif %}
