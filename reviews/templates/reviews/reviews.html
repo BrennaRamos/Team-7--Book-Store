@@ -14,17 +14,33 @@
 		{% endif %}
 	</div>
 	{% if user.is_authenticated %}
-		{% if reviews.count == 0 %}
-			<p>Be the first to review this book!</p>
-		{% elif this_user_review|length == 0 %}
-			<p>Create a review!</p>
-		{% endif %}
+		{% if purchased %}
+			{% if reviewed_already %}
+				<li>
+					<div class="alert alert-warning"> You have already reviewed this book. </div>
+				</li>
+			{% else %}
+				{% if reviews.count == 0 %}
+					<p>Be the first to review this book!</p>
+				{% elif this_user_review|length == 0 %}
+					<p>Create a review!</p>
+				{% endif %}
 
-		<form method="post" class="review-form-group">
-			{% csrf_token %}
-			{{ review_form.as_p}}
-			<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
-		</form>
+				<form method="post" class="review-form-group">
+					{% csrf_token %}
+					{{ review_form.as_p}}
+					<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
+				</form>
+			{% endif %}
+		{% else %}
+			<li>
+				<div class="alert alert-warning"> You must purchase this book in order to review it. </div>
+			</li>
+		{% endif %}
+	{% else %}
+		<li>
+			<div class="alert alert-warning"> Your must be logged-in to review a book. </div>
+		</li>
 	{% endif %}
 
 	<div class="main-content-section">
@@ -39,12 +55,12 @@
 				<blockquote class="blockquote">
 						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
 						<p class="mb-0">{{ this_review.content }}</p>
-						<footer class="blockquote-footer"> by <cite title="Source Title">{{ this_review.author|capfirst }}</cite></footer>
+						<footer class="blockquote-footer"> by <cite title="Source Title">You</cite></footer>
 				</blockquote>
 			{% endfor %}
 		{% endif %}
 
-		{% if this_user_review %}
+		{% if this_user_review and reviews_minus_this_user.count > 0 %}
 			<h3>Other's reviews:</h3>
 		{% endif %}
 
