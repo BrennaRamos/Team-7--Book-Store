@@ -4,7 +4,7 @@ from bookstore.models import Book
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Review(models.Model):
-	content = models.TextField()
+	content = models.CharField(max_length=800)
 	date_posted = models.DateTimeField(auto_now_add=True)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)

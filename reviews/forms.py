@@ -5,3 +5,8 @@ class ReviewForm(forms.ModelForm):
 	class Meta:
 		model = Review
 		fields = ('content', 'rating', 'anonymous')
+		widgets = {
+            'content' : forms.Textarea(attrs={
+                'maxlength': '800',
+            }),
+        }

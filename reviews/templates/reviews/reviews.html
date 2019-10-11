@@ -27,6 +27,7 @@
 				{% endif %}
 
 				<form method="post" class="review-form-group">
+					<p>Write a review no more than 800 characters long.</p>
 					{% csrf_token %}
 					{{ review_form.as_p}}
 					<input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
@@ -55,7 +56,7 @@
 				<blockquote class="blockquote">
 						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
 						<p class="mb-0">{{ this_review.content }}</p>
-						<footer class="blockquote-footer"> by <cite title="Source Title">You</cite></footer>
+						<footer class="blockquote-footer"> by <cite title="Source Title">You - {{ this_review.date_posted }}</cite></footer>
 				</blockquote>
 			{% endfor %}
 		{% endif %}
@@ -68,12 +69,14 @@
 			<blockquote class="blockquote">
 				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
 				<p class="mb-0">{{ review.content }}</p>
-				<footer class="blockquote-footer"> by 
+				<footer class="blockquote-footer"> by
+					<cite title="Source Title">
 					{% if review.anonymous %}
-						<cite title="Source Title">Anonymous</cite>
+						Anonymous
 					{% else %}
-						<cite title="Source Title">{{ review.author|capfirst }}</cite>
+						{{ review.author|capfirst }}
 					{% endif %}
+					 - {{ review.date_posted }}</cite>
 				</footer>
 			</blockquote>
     	{% endfor %}
