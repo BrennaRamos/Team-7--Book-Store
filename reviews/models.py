@@ -13,7 +13,6 @@ class Review(models.Model):
 	ANONYMITY_CHOICES = [
 	("Username", "Username"),
     ("Anonymous", "Anonymous"),
-    ("Full Name", "Full Name"),
     ]
 	anonymity = models.CharField(max_length=50, choices=ANONYMITY_CHOICES, default='Username')
 
