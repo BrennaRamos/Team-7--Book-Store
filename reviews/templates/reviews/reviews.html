@@ -54,9 +54,11 @@
 			<h3>Your review:</h3>
 			{% for this_review in this_user_review %}
 				<blockquote class="blockquote">
-						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
-						<p class="mb-0">{{ this_review.content }}</p>
-						<footer class="blockquote-footer"> by <cite title="Source Title">You - {{ this_review.date_posted }}</cite></footer>
+					<cite title="Source Title">
+						<img class="rounded-circle account-img" src="{{ this_review.author.profile.profilePic.url }}" width="50" height="50">
+						{{ this_review.author|capfirst }} | {{ this_review.date_posted }}</cite>
+					<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
+					<p class="mb-0">{{ this_review.content }}</p>
 				</blockquote>
 			{% endfor %}
 		{% endif %}
@@ -67,17 +69,17 @@
 
 		{% for review in reviews_minus_this_user %}
 			<blockquote class="blockquote">
-				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
-				<p class="mb-0">{{ review.content }}</p>
-				<footer class="blockquote-footer"> by
-					<cite title="Source Title">
+				<cite title="Source Title">
 					{% if review.anonymous %}
+					<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
 						Anonymous
 					{% else %}
+						<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
 						{{ review.author|capfirst }}
 					{% endif %}
-					 - {{ review.date_posted }}</cite>
-				</footer>
+					 | {{ review.date_posted }}</cite>
+				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
+				<p class="mb-0">{{ review.content }}</p>
 			</blockquote>
     	{% endfor %}
     </div>
