@@ -37,6 +37,9 @@ class Book(models.Model):
 	price = models.DecimalField(max_digits=5, decimal_places=2)
 	photo = models.ImageField(upload_to="gallery")
 
+	class Meta:
+		ordering = ['title']
+
 	def __str__(self):
 		return self.title
 
