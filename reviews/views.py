@@ -33,7 +33,11 @@ def reviews(request, id, title):
 			if review_form.is_valid():
 				content = request.POST.get('content')
 				rating = request.POST.get('rating')
-				review = Review.objects.create(book=book, author=user, content=content, rating=rating)
+				if request.POST.get('anonymous'):
+					anonymous = True 
+				else:
+					anonymous = False 
+				review = Review.objects.create(book=book, author=user, content=content, rating=rating, anonymous=anonymous)
 				review.save()
 				messages.success(request, "You've successfully reviewed this book.")
 				review_form= ReviewForm()
