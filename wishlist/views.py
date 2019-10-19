@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from bookstore.models import Book
 from wishlist.models import WishlistName, WishlistEntrie
 from wishlist.forms import WishlistNameForm
 
@@ -28,3 +29,11 @@ def rename_wish(request):
         
     
     return render(request, 'wishlist/home.html', {'form' : form})
+
+def add_wish(request, book_id, homeNum):
+
+    theBook = Book.objects.get(id = book_id)
+    newEnt = WishlistEntrie(username = request.user.username, book = theBook, home = homeNum )
+    newEnt.save()
+
+    return redirect(request.GET.get('from'))

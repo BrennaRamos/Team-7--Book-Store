@@ -64,6 +64,12 @@ p.ex2 {
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
     <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+    {% if user.is_authenticated %}
+    <br> Add to Wishlists:
+    <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}">#1</a>, 
+    <a href="{% url 'addtowish' book.id 1 %}?from={{request.path|urlencode}}">#2</a>, 
+    <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}">#3</a>
+    {% endif  %}
 </p>
 </li>
 

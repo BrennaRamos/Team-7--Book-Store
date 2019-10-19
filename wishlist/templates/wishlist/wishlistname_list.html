@@ -1,35 +1,40 @@
 
 {% extends 'base.html' %}
 {% block content %}
+{% if user.is_authenticated %}
   <h2>Wishlist view!</h2>
     <ol>
         {% for wishlistname in object_list %}
-            <li>{{ wishlistname.wish_list_name_0 }}<ol>
+	{% if wishlistname.username == user.username %}
+            <li><h5>{{ wishlistname.wish_list_name_0 }}</h5><ul>
                 {% for wishlistentrie in view.entries %}
-                    {% if wishlistentrie.home == '0' %}
+                    {% if wishlistentrie.home == '0' and user.username == wishlistentrie.username %}
                         <li>{{ wishlistentrie.book }}</li>
                     {% endif %}
-                {% endfor %}</ol></li>
+                {% endfor %}</ul></li>
 
             {% if wishlistname.wish_list_name_1 != null %}
-                <li>{{ wishlistname.wish_list_name_1 }}<ol>
+                <li><h5>{{ wishlistname.wish_list_name_1 }}</h5><ul>
                 {% for wishlistentrie in view.entries %}
-                    {% if wishlistentrie.home == '1' %}
+                    {% if wishlistentrie.home == '1' and user.username == wishlistentrie.username %}
                         <li>{{ wishlistentrie.book }}</li>
                     {% endif %}
-                {% endfor %}</ol></li>
+                {% endfor %}</ul></li>
             {% endif %}
 
             {% if wishlistname.wish_list_name_2 != null %}
-                <li>{{ wishlistname.wish_list_name_2 }}<ol>
+                <li><h5>{{ wishlistname.wish_list_name_2 }}</h5><ul>
                 {% for wishlistentrie in view.entries %}
-                    {% if wishlistentrie.home == '2' %}
+                    {% if wishlistentrie.home == '2' and user.username == wishlistentrie.username %}
                         <li>{{ wishlistentrie.book }}</li>
                     {% endif %}
-                {% endfor %}</ol></li>
+                {% endfor %}</ul></li>
             {% endif %}
-
+	{% endif %}
         {% endfor %}
 
     </ol>
+{% else %}
+	<h2>Sign in to make Wishlists!</h2>
+{% endif %}
 {% endblock content %}
