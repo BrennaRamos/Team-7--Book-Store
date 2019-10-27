@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Avg
+import datetime
+
 
 def reviews(request, id, title):
 	user = request.user
@@ -25,24 +27,20 @@ def reviews(request, id, title):
 		reviewed_already = None
 
 	if request.method == 'POST':
-		if Review.objects.filter(book=book, author=user).exists():
-			messages.warning(request, "You can only review a book once.")
-			review_form = ReviewForm(request.POST or None)
-		else:
-			review_form = ReviewForm(request.POST or None)
-			if review_form.is_valid():
-				content = request.POST.get('content')
-				rating = request.POST.get('rating')
-				if request.POST.get('anonymous'):
-					anonymous = True 
-				else:
-					anonymous = False 
-				review = Review.objects.create(book=book, author=user, content=content, rating=rating, anonymous=anonymous)
-				review.save()
-				messages.success(request, "You've successfully reviewed this book.")
-				review_form= ReviewForm()
+		review_form = ReviewForm(request.POST or None)
+		if review_form.is_valid():
+			content = request.POST.get('content')
+			rating = request.POST.get('rating')
+			if request.POST.get('anonymous'):
+				anonymous = True 
 			else:
-				review_form= ReviewForm()
+				anonymous = False 
+			review = Review.objects.create(book=book, author=user, content=content, rating=rating, anonymous=anonymous)
+			review.save()
+			messages.success(request, "You've successfully reviewed this book.")
+			return HttpResponseRedirect('/reviews/%s/%s' % (book.id, book.title))
+		else:
+			review_form= ReviewForm()
 	else:
 		review_form= ReviewForm()
 
@@ -59,3 +57,27 @@ def reviews(request, id, title):
     	'reviewed_already': reviewed_already,
     }
 	return render(request, 'reviews/reviews.html', context)
+
+
+def updateReview(request, id):
+	review = get_object_or_404(Review, id=id)
+	if review:
+		update_review_form = UpdateReviewForm(request.POST or None, initial={'content': review.content, 'rating': review.rating, 'anonymous': review.anonymous})
+
+	if update_review_form.is_valid():
+		review.content = request.POST.get('content')
+		review.rating = request.POST.get('rating')
+		review.date_posted = datetime.datetime.now()
+		if request.POST.get('anonymous'):
+			review.anonymous = True 
+		else:
+			review.anonymous = False 
+		review.save()
+		return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
+				
+	context = {
+    	'title': 'Update Review',
+    	'update_review_form': update_review_form,
+    	'book_title': review.book.title,
+    }
+	return render(request, 'reviews/update-review.html', context)

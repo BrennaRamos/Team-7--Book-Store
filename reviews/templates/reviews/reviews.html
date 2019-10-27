@@ -16,9 +16,6 @@
 	{% if user.is_authenticated %}
 		{% if purchased %}
 			{% if reviewed_already %}
-				<li>
-					<div class="alert alert-warning"> You have already reviewed this book. </div>
-				</li>
 			{% else %}
 				{% if reviews.count == 0 %}
 					<p>Be the first to review this book!</p>
@@ -51,24 +48,25 @@
 
 		<h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>
 		{% if this_user_review %}
-			<h3>Your review:</h3>
+			<h3 style="background-color:#e6ffe6; border-radius:15px;padding:2px;">Your review:<h3>
 			{% for this_review in this_user_review %}
-				<blockquote class="blockquote">
+				<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 					<cite title="Source Title">
 						<img class="rounded-circle account-img" src="{{ this_review.author.profile.profilePic.url }}" width="50" height="50">
-						{{ this_review.author|capfirst }} | {{ this_review.date_posted }}</cite>
-					<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
-					<p class="mb-0">{{ this_review.content }}</p>
+								{{ this_review.author|capfirst }} | {{ this_review.date_posted }}</cite>
+								<a href="{% url 'updateReview' this_review.id %}">Update</a>
+								<a href="">Delete</a>
+						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
+						<p class="mb-0">{{ this_review.content }}</p>
 				</blockquote>
 			{% endfor %}
 		{% endif %}
-
 		{% if this_user_review and reviews_minus_this_user.count > 0 %}
-			<h3>Other's reviews:</h3>
+			<h3 style="background-color:#e6ffe6; border-radius:15px;padding:2px;">Other's reviews:</h3>
 		{% endif %}
 
 		{% for review in reviews_minus_this_user %}
-			<blockquote class="blockquote">
+			<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 				<cite title="Source Title">
 					{% if review.anonymous %}
 					<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
