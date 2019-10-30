@@ -5,13 +5,63 @@
 {% block content %}
 
 
-<h1>Welcome!</h1>
+
+<h1 align="left"><font color="brown">Welcome to your shopping cart!</font></h1>
+<br>
 
 {% if emptycart %}
 
-<h2>Your cart is empty :(</h2>
+<br>
+<br>
+
+<h3>Items in your cart:</h3>
+
+<br>
+
+<h4><font color="green">Your cart is empty :(</font></h4>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<h3>Saved For Later:</h3>
+
+<br>
+
+    <table class='table'>
+        
+            {% if notsaveforlater %}
+            <h4><font color="green">Nothing saved :(</font></h4>
+            {% endif %}
+            {% for book in saveforlater.items.all %}
+            <tr>
+            <td>
+                <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 >
+            </td>
+            <td>
+                <h6><font color="green"> {{book}} </h6></font> <b>Author:</b> {{book.author}}
+            </td>
+            <td>
+                <b>Price:</b> $ {{book.price}}
+            </td>
+            <td>
+                <a href="{% url 'removefromsaveforlater' book.id %}">Remove</a>
+            </td>
+            <td>
+                <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+            </td>
+            </tr>
+            {% endfor %} 
+
+    </table>
+
+<br>
 
 {% else %}
+
+
 
 <h3>Items in your cart:</h3>
 
@@ -25,7 +75,7 @@
                 <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 >
             </td>
             <td>
-                <h4><font color="green"> {{book}} </h4></font> <b>Author:</b> {{book.author}}
+                <h6><font color="green"> {{book}} </h6></font> <b>Author:</b> {{book.author}}
             </td>
             <td>
                 <b>Price:</b> $ {{book.price}}
@@ -47,6 +97,9 @@
             <td>
                 <a href="{% url 'removefromcart' book.id %}">Remove</a>
             </td>
+            <td>
+                <a href="{% url 'saveforlater' book.id %}">Save For Later</a>
+            </td>
             </tr>
             {% endfor %} 
 
@@ -62,8 +115,47 @@
 
 <h4 align="right"><a href="{% url 'purchaseitems' %}"><button style="background-color:orange; border-color:green; color:black" ><b>Purchase Items</b></button></a></h4>
 
+<br>
+<br>
+<br>
+<br>
+
+<h3>Saved For Later:</h3>
+
+<br>
+
+    <table class='table'>
+        
+            {% if notsaveforlater %}
+            <h4><font color="green">Nothing saved :(</font></h4>
+            {% endif %}
+            {% for book in saveforlater.items.all %}
+            <tr>
+            <td>
+                <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 >
+            </td>
+            <td>
+                <h6><font color="green"> {{book}} </h6></font> <b>Author:</b> {{book.author}}
+            </td>
+            <td>
+                <b>Price:</b> $ {{book.price}}
+            </td>
+            <td>
+                <a href="{% url 'removefromsaveforlater' book.id %}">Remove</a>
+            </td>
+            <td>
+                <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+            </td>
+            </tr>
+            {% endfor %} 
+
+    </table>
+
+<br>
 
 
 {% endif %}
+
+
 
 {% endblock %}

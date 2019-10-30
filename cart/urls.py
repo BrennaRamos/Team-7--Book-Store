@@ -9,4 +9,6 @@ urlpatterns = [
     path('addbutton/<int:book_id>',views.add_button, name='addbutton'),
     path('removebutton/<int:book_id>',views.remove_button, name='removebutton'),
     path('purchaseitems/',views.purchase_items, name='purchaseitems'),
+    path('saveforlater/<int:book_id>',views.save_for_later, name='saveforlater'),
+    path('removefromsaveforlater/<int:book_id>',views.remove_from_saveforlater, name='removefromsaveforlater'),
 ]
