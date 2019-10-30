@@ -1,1 +1,1 @@
-from django.db.models.signal import post_save
+from django.db.models.signals import post_save
