@@ -72,7 +72,11 @@
 					<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
 						Anonymous
 					{% else %}
-						<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
+						{% if review.author.profile.profilePic.url %}
+							<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
+						{% else %}
+							<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
+						{% endif %}
 						{{ review.author|capfirst }}
 					{% endif %}
 					 | {{ review.date_posted }}</cite>
