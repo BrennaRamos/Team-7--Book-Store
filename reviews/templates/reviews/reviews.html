@@ -49,15 +49,15 @@
 		<h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>
 		{% if this_user_review %}
 			<h3 style="background-color:#e6ffe6; border-radius:15px;padding:2px;">Your review:<h3>
-			{% for this_review in this_user_review %}
+			{% for review in this_user_review %}
 				<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 					<cite title="Source Title">
-						<img class="rounded-circle account-img" src="{{ this_review.author.profile.profilePic.url }}" width="50" height="50">
-								{{ this_review.author|capfirst }} | {{ this_review.date_posted }}</cite>
-								<a href="{% url 'updateReview' this_review.id %}">Update</a>
-								<a href="{% url 'deleteReview' this_review.id %}">Delete</a>
-						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
-						<p class="mb-0">{{ this_review.content }}</p>
+						<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
+								{{ review.author|capfirst }} | {{ review.date_posted }}</cite>
+								<a href="{% url 'updateReview' review.id %}">Update</a>
+								<a href="{% url 'deleteReview' review.id %}">Delete</a>
+						<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
+						<p class="mb-0">{{ review.content }}</p>
 				</blockquote>
 			{% endfor %}
 		{% endif %}
@@ -69,13 +69,13 @@
 			<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 				<cite title="Source Title">
 					{% if review.anonymous %}
-					<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
+					<img class="rounded-circle account-img" src="/static/images/ReviewSectionImages/anon.png" width="50" height="50">
 						Anonymous
 					{% else %}
 						{% if review.author.profile.profilePic.url %}
 							<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
 						{% else %}
-							<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
+							<img class="rounded-circle account-img" src="/static/images/ReviewSectionImages/anon.png" width="50" height="50">
 						{% endif %}
 						{{ review.author|capfirst }}
 					{% endif %}
