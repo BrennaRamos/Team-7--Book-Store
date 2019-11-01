@@ -81,3 +81,17 @@ def updateReview(request, id):
     	'book_title': review.book.title,
     }
 	return render(request, 'reviews/update-review.html', context)
+
+def deleteReview(request, id):
+	review = get_object_or_404(Review, id=id)
+	if request.GET.get('Delete') == 'Delete':
+		review.delete()
+		return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
+	elif request.GET.get('Cancel') == 'Cancel':
+		return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
+	
+	context = {
+    	'title': 'Delete Review',
+    	'book_title': review.book.title,
+    }
+	return render(request, 'reviews/delete-review.html', context)

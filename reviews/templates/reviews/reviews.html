@@ -55,7 +55,7 @@
 						<img class="rounded-circle account-img" src="{{ this_review.author.profile.profilePic.url }}" width="50" height="50">
 								{{ this_review.author|capfirst }} | {{ this_review.date_posted }}</cite>
 								<a href="{% url 'updateReview' this_review.id %}">Update</a>
-								<a href="">Delete</a>
+								<a href="{% url 'deleteReview' this_review.id %}">Delete</a>
 						<p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
 						<p class="mb-0">{{ this_review.content }}</p>
 				</blockquote>
