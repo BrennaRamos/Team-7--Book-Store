@@ -37,3 +37,11 @@ def add_wish(request, book_id, homeNum):
     newEnt.save()
 
     return redirect(request.GET.get('from'))
+
+def trans_wish(request, entrie_id, newHome):
+
+    oldEntrie = WishlistEntrie.objects.get(id = entrie_id)
+    newEntrie = WishlistEntrie(username = oldEntrie.username, book = oldEntrie.book, home = newHome )
+    oldEntrie.delete()
+    newEntrie.save()
+    return redirect(request.GET.get('from'))
