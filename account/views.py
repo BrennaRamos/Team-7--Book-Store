@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .forms import signUpForm
+from .forms import signUpForm, accountUpdateForm, profileUpdateForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -22,5 +22,13 @@ def signup(request):
 
 @login_required
 def profile(request):
-    return render(request,'account/profile.html')
+    accUpdateForm = accountUpdateForm()
+    proUpdateForm = profileUpdateForm()
+
+    context = {
+        'accUpdateForm':accUpdateForm,
+        'proUpdateForm':proUpdateForm
+    }
+
+    return render(request,'account/profile.html', context)
     
