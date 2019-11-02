@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Review
-from bookstore.models import Book, Book_User
+from bookstore.models import Book, Book_User, Author, Genre, Publisher
 from .forms import *
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -55,6 +55,13 @@ def reviews(request, id, title):
     	'user': user,
     	'purchased': purchased,
     	'reviewed_already': reviewed_already,
+		'book_author' : book.author,
+		'book_authordesc' : book.author.biography,
+		'book_desc' : book.bookDescription,
+		'book_genre' : book.genre,
+		'book_publisher' : book.publisher,
+		'book_pubdate' : book.datePublished,
+		'book_photo' : book.photo,
     }
 	return render(request, 'reviews/reviews.html', context)
 
