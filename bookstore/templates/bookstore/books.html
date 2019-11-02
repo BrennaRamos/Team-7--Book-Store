@@ -17,20 +17,6 @@ p.ex2 {
 </style>
 </head>
 
-<script type="text/javascript">
-
-    function resizeImage(id) {
-        var img = document.getElementById("img_"+id);
-        if(img.style.height ==="100%") {
-            img.style.height = "170px";
-            img.style.width = "100px";
-        } else {
-            img.style.height = "100%";
-            img.style.width = "100%";
-        }
-    }
-</script>
-
 <button type="button">Sort by Title</button>
 <button type="button">Sort by Author</button>
 <button type="button">Sort by Price</button> 
@@ -59,7 +45,7 @@ p.ex2 {
 
 <li class="list-group-item">
 <p class="ex1">
-    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})"> 
+    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170>
 	<br>
 	<span class="font-weight-bold">
                     {{ book.title }}
