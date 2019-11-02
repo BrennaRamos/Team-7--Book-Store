@@ -17,25 +17,27 @@ p.ex2 {
 </style>
 </head>
 
-<script type="text/javascript">
-
-    function resizeImage(id) {
-        var img = document.getElementById("img_"+id);
-        if(img.style.height ==="100%") {
-            img.style.height = "170px";
-            img.style.width = "100px";
-        } else {
-            img.style.height = "100%";
-            img.style.width = "100%";
-        }
-    }
-</script>
-
 <button type="button">Sort by Title</button>
 <button type="button">Sort by Author</button>
 <button type="button">Sort by Price</button> 
 <button type="button">Sort by Rating</button> 
 <button type="button">Sort by Publish Date</button> 
+
+<div class="pagination">
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page={{ books.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 
 <ul class="list-group"></ul>
 
@@ -43,7 +45,7 @@ p.ex2 {
 
 <li class="list-group-item">
 <p class="ex1">
-    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage({{ forloop.counter }})"> 
+    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170>
 	<br>
 	<span class="font-weight-bold">
                     {{ book.title }}
@@ -60,7 +62,7 @@ p.ex2 {
    
     <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
-    <a href="{% url 'reviews' book.id book.title %}">Check Reviews</a>
+    <a href="{% url 'reviews' book.id book.title %}">View Details and Reviews</a>
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
     <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book
 from django.views.generic import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def home(request):
@@ -12,11 +13,21 @@ def home(request):
     return render(request,'bookstore/home.html', context)
 
 def books(request):
-    context  = {
-        'books': Book.objects.all(),
-        'title':'Books'
-    }
-    return render(request,'bookstore/books.html', context)
+    book_list = Book.objects.all()
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books.html', {'books': books})
 
 # Placeholder Views
 #def book(request):
