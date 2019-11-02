@@ -76,7 +76,7 @@ p.ex2 {
    
     <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
-    <a href="{% url 'reviews' book.id book.title %}">Check Reviews</a>
+    <a href="{% url 'reviews' book.id book.title %}">View Details and Reviews</a>
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
     <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
