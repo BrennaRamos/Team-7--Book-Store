@@ -6,7 +6,7 @@
 		<p>Remember to keep your review no more than 800 characters long.</p>
 		{% csrf_token %}
 		{{ update_review_form.as_p}}
-		<input type="submit" value="Update" class="btn btn-outline-success" id="update-btn">
+		<input type="submit" value="Update" name="Update" id="update-btn" class="btn btn-outline-success">
 	</form>
 </div>
 {% endblock content %}

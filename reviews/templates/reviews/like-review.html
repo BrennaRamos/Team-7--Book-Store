@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="review-wrap">
+	<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+		<cite title="Source Title">
+			{% if review.anonymous %}
+				<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
+				Anonymous
+			{% else %}
+				{% if review.author.profile.profilePic.url %}
+					<img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
+				{% else %}
+					<img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
+				{% endif %}
+					{{ review.author|capfirst }}
+			{% endif %}
+			| {{ review.date_posted }}</cite>
+		<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
+		<p class="mb-0">{{ review.content }}</p>
+		<p class="mb-0">{{ review.num_likes }} Like(s)</p>
+		<form method="get">
+			{% csrf_token %}
+			{% if liked_already == False %}
+				<input type="submit" value="Like" name="Like" id="like-btn" class="btn btn-outline-success">
+			{% elif liked_already == True %}
+				<input type="submit" value="Dislike" name="Dislike" id="dislike-btn" class="btn btn-outline-danger">
+			{% endif %}
+			<input type="submit" value="Back" name="Back" id="back-btn" class="btn btn-outline-info">
+		</form>
+	</blockquote>
+</div>
+{% endblock content %}

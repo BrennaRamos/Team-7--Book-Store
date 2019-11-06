@@ -4,8 +4,8 @@
 	<form method="get" class="review-form-group">
 		{% csrf_token %}
 		<p>Do you want to delete your review for {{ book_title }}?</p>
-		<input type="submit" value="Delete" name="Delete" id="delete-btn">
-		<input type="submit" value="Cancel" name="Cancel" id="cancel-btn">
+		<input type="submit" value="Delete" name="Delete" id="delete-btn" class="btn btn-outline-success">
+		<input type="submit" value="Cancel" name="Cancel" id="cancel-btn" class="btn btn-outline-danger">
 	</form>
 </div>
 {% endblock content %}

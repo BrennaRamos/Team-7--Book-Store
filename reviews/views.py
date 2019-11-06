@@ -12,7 +12,7 @@ import datetime
 def reviews(request, id, title):
     user = request.user
     book = get_object_or_404(Book, id=id, title=title)
-    reviews = Review.objects.filter(book=book).order_by('-id')
+    reviews = Review.objects.filter(book=book).order_by('-num_likes')
     average_rating = reviews.aggregate(average=Avg('rating'))
 
     if user.is_authenticated:
@@ -45,15 +45,6 @@ def reviews(request, id, title):
     else:
         review_form = ReviewForm()
 
-    # Check that Like button is pressed
-    if request.GET.get('Like') == 'Like':
-        review = get_object_or_404(Review, id=request.GET.get('review_id'))
-        like = Review_Like.objects.create(user=user, review=review)
-        like.save()
-        review.num_likes = review.num_likes + 1
-        review.save()
-        return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
-
     context = {
         'title': 'Reviews',
         'reviews': reviews,
@@ -74,26 +65,23 @@ def reviews(request, id, title):
         'book_photo': book.photo,
     }
     return render(request, 'reviews/reviews.html', context)
-
-
+    
 def updateReview(request, id):
     review = get_object_or_404(Review, id=id)
     if review:
-        update_review_form = UpdateReviewForm(request.POST or None,
-                                              initial={'content': review.content, 'rating': review.rating,
-                                                       'anonymous': review.anonymous})
+        update_review_form = UpdateReviewForm(request.POST or None, initial={'content': review.content, 'rating': review.rating, 'anonymous': review.anonymous})
 
     if update_review_form.is_valid():
         review.content = request.POST.get('content')
         review.rating = request.POST.get('rating')
         review.date_posted = datetime.datetime.now()
         if request.POST.get('anonymous'):
-            review.anonymous = True
+            review.anonymous = True 
         else:
-            review.anonymous = False
+            review.anonymous = False 
         review.save()
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
-
+                
     context = {
         'title': 'Update Review',
         'update_review_form': update_review_form,
@@ -115,3 +103,33 @@ def deleteReview(request, id):
         'book_title': review.book.title,
     }
     return render(request, 'reviews/delete-review.html', context)
+
+def likeReview(request, id):
+    user = request.user
+    review = get_object_or_404(Review, id=id)
+    liked_already = Review_Like.objects.filter(user=user, review=review).exists()
+
+    context = {
+        'title': 'Like Review',
+        'liked_already': liked_already,
+        'review': review,
+    }
+
+    if request.GET.get('Like') == 'Like':
+        like = Review_Like.objects.create(user=user, review=review)
+        like.save()
+        review.num_likes = Review_Like.objects.filter(review=review).count()
+        review.save()
+        return HttpResponseRedirect('/review/more/%s' % review.id)
+
+    elif request.GET.get('Dislike') == 'Dislike':
+        like = get_object_or_404(Review, id=id)
+        like.delete()
+        review.num_likes = Review_Like.objects.filter(review=review).count()
+        review.save()
+        return HttpResponseRedirect('/review/more/%s' % review.id)
+    elif request.GET.get('Back') == 'Back':
+        return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
+
+    return render(request, 'reviews/like-review.html', context)
+
