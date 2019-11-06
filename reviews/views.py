@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Review
+from .models import Review, Review_Like
 from bookstore.models import Book, Book_User, Author, Genre, Publisher
 from .forms import *
 from django.shortcuts import get_object_or_404
@@ -14,6 +14,7 @@ def reviews(request, id, title):
     book = get_object_or_404(Book, id=id, title=title)
     reviews = Review.objects.filter(book=book).order_by('-id')
     average_rating = reviews.aggregate(average=Avg('rating'))
+
     if user.is_authenticated:
         this_user_review = reviews.filter(author=user)
         reviews_minus_this_user = reviews.exclude(author=user)
@@ -43,6 +44,15 @@ def reviews(request, id, title):
             review_form = ReviewForm()
     else:
         review_form = ReviewForm()
+
+    # Check that Like button is pressed
+    if request.GET.get('Like') == 'Like':
+        review = get_object_or_404(Review, id=request.GET.get('review_id'))
+        like = Review_Like.objects.create(user=user, review=review)
+        like.save()
+        review.num_likes = review.num_likes + 1
+        review.save()
+        return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
 
     context = {
         'title': 'Reviews',

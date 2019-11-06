@@ -110,9 +110,17 @@
 						{% endif %}
 						{{ review.author|capfirst }}
 					{% endif %}
-					 | {{ review.date_posted }}</cite>
+					| {{ review.date_posted }}</cite>
 				<p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
 				<p class="mb-0">{{ review.content }}</p>
+				<p class="mb-0">{{ review.num_likes }} Like(s)</p>
+				{% if user.is_authenticated %}
+					<form method="get">
+						{% csrf_token %}
+						<input type="hidden" name="review_id" value="{{review.id}}" />
+						<input type="submit" value="Like" name="Like" id="like-btn">
+					</form>
+				{% endif %}
 			</blockquote>
     	{% endfor %}
     </div>
