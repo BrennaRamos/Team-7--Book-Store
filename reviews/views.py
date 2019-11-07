@@ -123,7 +123,7 @@ def likeReview(request, id):
         return HttpResponseRedirect('/review/more/%s' % review.id)
 
     elif request.GET.get('Dislike') == 'Dislike':
-        like = get_object_or_404(Review, id=id)
+        like = get_object_or_404(Review_Like, review=review)
         like.delete()
         review.num_likes = Review_Like.objects.filter(review=review).count()
         review.save()
