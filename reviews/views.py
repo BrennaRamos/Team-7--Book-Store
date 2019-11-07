@@ -109,12 +109,6 @@ def likeReview(request, id):
     review = get_object_or_404(Review, id=id)
     liked_already = Review_Like.objects.filter(user=user, review=review).exists()
 
-    context = {
-        'title': 'Like Review',
-        'liked_already': liked_already,
-        'review': review,
-    }
-
     if request.GET.get('Like') == 'Like':
         like = Review_Like.objects.create(user=user, review=review)
         like.save()
@@ -130,6 +124,12 @@ def likeReview(request, id):
         return HttpResponseRedirect('/review/more/%s' % review.id)
     elif request.GET.get('Back') == 'Back':
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
+
+    context = {
+        'title': 'Like Review',
+        'liked_already': liked_already,
+        'review': review,
+    }
 
     return render(request, 'reviews/like-review.html', context)
 
