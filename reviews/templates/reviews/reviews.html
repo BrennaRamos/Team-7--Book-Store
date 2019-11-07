@@ -63,12 +63,18 @@
 			{% endif %}
 		{% else %}
 			<li>
-				<div class="alert alert-warning"> You must purchase this book in order to review it. </div>
+				<div class="alert alert-warning">
+					<a href="{% url 'addtocart' book_id %}?from={{request.path|urlencode}}">Add "{{ book_title }}" to cart</a>
+					and purchase it in order to review it!
+				</div>
 			</li>
 		{% endif %}
 	{% else %}
 		<li>
-			<div class="alert alert-warning"> Your must be logged-in to review a book. </div>
+			<div class="alert alert-warning">
+				<a href="{% url 'login' %}">Log In</a>
+				to review "{{ book_title }}"
+			</div>
 		</li>
 	{% endif %}
 

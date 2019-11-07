@@ -52,6 +52,7 @@ def reviews(request, id, title):
         'reviews_minus_this_user': reviews_minus_this_user,
         'review_form': review_form,
         'book_title': book.title,
+        'book_id': book.id,
         'average_rating': average_rating['average'],
         'user': user,
         'purchased': purchased,
