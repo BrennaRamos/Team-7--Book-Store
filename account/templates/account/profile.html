@@ -2,13 +2,17 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
+        <h1>Profile</h1>
         <div class="card">
             <div class="card-body">
-                <h1>Profile</h1>
-                <div class="media">
-                    <img class="rounded-circle account-img" src="{{ user.profile.profilePic.url }}" width="50" height="50">
-                    <div class="media-body">
-                    <h2 class="account-heading">{{ user.username }}</h2>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img class="rounded-circle img-thumbnail" src="{{ user.profile.profilePic.url }}" width="150" height="150">
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="account-heading">{{ user.username }}</h3>
+                        <p>{{ user.email }}</p>
+                        <p>{{ user.first_name}} {{user.last_name}}</p>
                     </div>
                 </div>
                 <form method="POST" endctype="multipart/form-data">
