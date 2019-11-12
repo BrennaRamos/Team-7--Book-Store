@@ -2,35 +2,32 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
-        <h1>Profile</h1>
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.profilePic.url }}" width="50" height="50">
-            <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
-            </div>
-        </div>
-        <div class="row justify-content-md-center pb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST" endctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="from-group">
-                                <legend>Edit Profile Info</legend>
-                                <div class="border-top">
-                                        {{ accUpdateForm|crispy }}
-                                        {{ proUpdateForm|crispy }}
-                                        <button class="btn btn-outline-info mb-3" type="submit">Update</button>
-                                </div>
-                            </div>
-            
-                            <div class="border-top pt-3 mb-3">
-                                <small>Already have an account?</small>
-                                <a class="mr-3 btn btn-primary" href="{% url 'login' %}">Log In</a>
-                            </div>
-                        </form>
+        <div class="card">
+            <div class="card-body">
+                <h1>Profile</h1>
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ user.profile.profilePic.url }}" width="50" height="50">
+                    <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
                     </div>
                 </div>
+                <form method="POST" endctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="from-group">
+                        <legend>Edit Profile Info</legend>
+                        <div class="border-top">
+                                {{ accUpdateForm|crispy }}
+                                {{ proUpdateForm|crispy }}
+                                <button class="btn btn-outline-info mb-3" type="submit">Update</button>
+                        </div>
+                    </div>
+    
+                    <div class="border-top pt-3 mb-3">
+                        <small>Already have an account?</small>
+                        <a class="mr-3 btn btn-primary" href="{% url 'login' %}">Log In</a>
+                    </div>
+                </form>
             </div>
+        </div>
     </div>
 {% endblock content %}

@@ -22,8 +22,18 @@ def signup(request):
 
 @login_required
 def profile(request):
-    accUpdateForm = accountUpdateForm()
-    proUpdateForm = profileUpdateForm()
+
+    if request.method == 'POST':
+        accUpdateForm = accountUpdateForm(request.POST, instance=request.user)
+        proUpdateForm = profileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if accUpdateForm.is_valid() and  proUpdateForm.is_valid():
+            accUpdateForm.save()
+            proUpdateForm.save()
+            messages.success(request, f'Your account has been successfully updated.')
+            return redirect('profile')
+    else:
+        accUpdateForm = accountUpdateForm(instance=request.user)
+        proUpdateForm = profileUpdateForm(instance=request.user.profile)
 
     context = {
         'accUpdateForm':accUpdateForm,
