@@ -1,18 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>
-        {{ author.name }}
+{% extends 'base.html'%}
+{% block content %}
 
-        {% for book in books %}
-        <li>
-            {{ book.title }}
-        </li>
-        {% endfor %}
-    </h1>
+<script type="text/javascript">
+    function resizeImage(id) {
+        var img = document.getElementById(id);
+        if(img.style.height ==="50%") {
+            img.style.height = "170px";
+            img.style.width = "100px";
+        } else {
+            img.style.height = "50%";
+            img.style.width = "50%";
+        }
+    }
+</script>
+
+{% load staticfiles %}
+<head>
+
+<style>
+p.ex1 {
+  border: 1px solid grey;
+  padding: 35px;
+}
+
+p.ex2 {
+  border: 1px solid grey;
+  margin-left: 35px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}​
+</style>
+
+<body>
+    <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+        <h1>
+            <center>
+                {{ author.name }}
+            </center>
+        </h1>
+        {{ author.biography }}
+    </blockquote>
+    {% for book in books %}
+        <ul style="list-style-type:none;">
+            <li class="list">
+                <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+                    <center><h3><a href="{% url 'reviews' book.id book.title %}"> {{ book.title }}</a></h3></center>
+                    <center><img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage(id)"></center>
+                    <p> {{ book.bookDescription }} </p>
+                    <h6> Published by {{ book.publisher }} on {{ book.datePublished }} </h6>
+
+                    <span class="font-weight-bold">
+	                    ${{ book.price }}
+		            </span>
+                    <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+                    {% if user.is_authenticated %}
+                        <br> Add to Wishlists:
+                        <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}">#1</a>,
+                        <a href="{% url 'addtowish' book.id 1 %}?from={{request.path|urlencode}}">#2</a>,
+                        <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}">#3</a>
+                    {% endif  %}
+                </blockquote>
+            </li>
+        </ul>
+    {% endfor %}
 </body>
-</html>
+
+{% endblock content %}
