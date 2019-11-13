@@ -31,8 +31,10 @@ def books(request):
 
 def authors(request, id):
     author = get_object_or_404(Author, id=id)
+    book_list = Book.objects.all().filter(author=author.id)
     context = {
         'author': author,
+        'books': book_list,
     }
     return render(request, 'bookstore/authors.html', context)
 
