@@ -45,3 +45,9 @@ def trans_wish(request, entrie_id, newHome):
     oldEntrie.delete()
     newEntrie.save()
     return redirect(request.GET.get('from'))
+
+def del_wish(request, entrie_id):
+    
+    trashEntrie = WishlistEntrie.objects.get(id = entrie_id)
+    trashEntrie.delete()
+    return redirect(request.GET.get('from'))
