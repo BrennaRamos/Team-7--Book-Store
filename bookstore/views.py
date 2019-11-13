@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Book
+from .models import Book, Author
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -28,6 +28,13 @@ def books(request):
     #    'title':'Books'
     #}
     return render(request,'bookstore/books.html', {'books': books})
+
+def authors(request, id):
+    author = get_object_or_404(Author, id=id)
+    context = {
+        'author': author,
+    }
+    return render(request, 'bookstore/authors.html', context)
 
 # Placeholder Views
 #def book(request):
