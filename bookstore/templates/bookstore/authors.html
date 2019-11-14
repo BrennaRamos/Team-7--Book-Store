@@ -51,16 +51,20 @@ ul {
                     <center><img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170 onclick="resizeImage(id)"></center>
                     <p> {{ book.bookDescription }} </p>
                     <h6> Published by {{ book.publisher }} on {{ book.datePublished }} </h6>
-
-                    <span class="font-weight-bold">
-	                    ${{ book.price }}
-		            </span>
-                    <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+                    <center>
+                        <span class="font-weight-bold">
+                            ${{ book.price }}
+                        </span>
+                        <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+                    </center>
                     {% if user.is_authenticated %}
-                        <br> Add to Wishlists:
-                        <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}">#1</a>,
-                        <a href="{% url 'addtowish' book.id 1 %}?from={{request.path|urlencode}}">#2</a>,
-                        <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}">#3</a>
+
+                        <center>
+                            Add to Wishlist:
+                            <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_1</i></a>
+                            <a href="{% url 'addtowish' book.id 1 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_2</i></a>
+                            <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_3</i></a>
+                        </center>
                     {% endif  %}
                 </blockquote>
             </li>

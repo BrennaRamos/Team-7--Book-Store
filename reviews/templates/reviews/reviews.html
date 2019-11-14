@@ -17,15 +17,19 @@
 <div class="review-wrap">
 	<center><h1> {{ book_title }}</h1></center>
 	<center><img id="1" src="{{ book_photo.url }}" width=100 height=170 onclick="resizeImage(1)"></center>
-	<br> Add to Wishlist:
-    	<a href="{% url 'addtowish' book_id 0 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_1</i></a> 
-    	<a href="{% url 'addtowish' book_id 1 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_2</i></a> 
-    	<a href="{% url 'addtowish' book_id 2 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_3</i></a>
 	<br>
 	<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 		<h5> {{ book_genre }} </h5>
 		<p> {{ book_desc }} </p>
 		<h6> Published by {{ book_publisher }} on {{ book_pubdate }} </h6>
+	</blockquote>
+	<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+		<center>
+			Add to Wishlist:
+    	<a href="{% url 'addtowish' book_id 0 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_1</i></a>
+    	<a href="{% url 'addtowish' book_id 1 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_2</i></a>
+    	<a href="{% url 'addtowish' book_id 2 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_3</i></a>
+		</center>
 	</blockquote>
 	<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
 		<h5>
