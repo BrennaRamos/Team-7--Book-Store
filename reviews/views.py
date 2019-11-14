@@ -64,6 +64,7 @@ def reviews(request, id, title):
         'book_publisher': book.publisher,
         'book_pubdate': book.datePublished,
         'book_photo': book.photo,
+        'book_price': book.price,
     }
     return render(request, 'reviews/reviews.html', context)
     
