@@ -52,13 +52,15 @@ ul {
                     <p> {{ book.bookDescription }} </p>
                     <h6> Published by {{ book.publisher }} on {{ book.datePublished }} </h6>
                     <center>
+
+                    </center>
+                    <center>
                         <span class="font-weight-bold">
                             ${{ book.price }}
                         </span>
                         <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
                     </center>
                     {% if user.is_authenticated %}
-
                         <center>
                             Add to Wishlist:
                             <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}"><i class="material-icons">filter_1</i></a>
