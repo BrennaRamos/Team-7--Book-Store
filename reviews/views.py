@@ -13,7 +13,6 @@ def reviews(request, id, title):
     user = request.user
     book = get_object_or_404(Book, id=id, title=title)
     reviews = Review.objects.filter(book=book).order_by('-num_likes')
-    average_rating = reviews.aggregate(average=Avg('rating'))
 
     if user.is_authenticated:
         this_user_review = reviews.filter(author=user)
@@ -38,6 +37,9 @@ def reviews(request, id, title):
                 anonymous = False
             review = Review.objects.create(book=book, author=user, content=content, rating=rating, anonymous=anonymous)
             review.save()
+            average_rating = reviews.aggregate(average=Avg('rating'))
+            book.aveRating = average_rating['average']
+            book.save()
             messages.success(request, "You've successfully reviewed this book.")
             return HttpResponseRedirect('/reviews/%s/%s' % (book.id, book.title))
         else:
@@ -53,7 +55,7 @@ def reviews(request, id, title):
         'review_form': review_form,
         'book_title': book.title,
         'book_id': book.id,
-        'average_rating': average_rating['average'],
+        'average_rating': book.aveRating,
         'user': user,
         'purchased': purchased,
         'reviewed_already': reviewed_already,
@@ -82,6 +84,11 @@ def updateReview(request, id):
         else:
             review.anonymous = False 
         review.save()
+        book = get_object_or_404(Book, id=review.book.id)
+        reviews = Review.objects.filter(book=book).order_by('-num_likes')
+        average_rating = reviews.aggregate(average=Avg('rating'))
+        book.aveRating = average_rating['average']
+        book.save()
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
                 
     context = {
@@ -96,6 +103,11 @@ def deleteReview(request, id):
     review = get_object_or_404(Review, id=id)
     if request.GET.get('Delete') == 'Delete':
         review.delete()
+        book = get_object_or_404(Book, id=review.book.id)
+        reviews = Review.objects.filter(book=book).order_by('-num_likes')
+        average_rating = reviews.aggregate(average=Avg('rating'))
+        book.aveRating = average_rating['average']
+        book.save()
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
     elif request.GET.get('Cancel') == 'Cancel':
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
