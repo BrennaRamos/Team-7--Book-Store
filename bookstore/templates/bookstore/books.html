@@ -55,8 +55,6 @@
 {% for book in books %}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
-
-            <div class="list-group-item">
                 <p class="ex1">
                     <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170>
                     <br>
@@ -88,7 +86,6 @@
                     <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}">#3</a>
                     {% endif %}
                 </p>
-            </div>
         </blockquote>
     </center>
 {% endfor %}
