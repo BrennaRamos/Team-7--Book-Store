@@ -51,21 +51,23 @@ p.ex2 {
                     {{ book.title }}
                 </span>
 <br>
-    by {{ book.author }}
+    by <a href="{% url 'authors' book.author.id %}"> {{ book.author }}</a>
 <br>   {{ book.genre }}
 <br>
         Published on {{ book.datePublished }}
 <br>
+    Average Rating: {{ book.aveRating }}
+    <br>
 	<span class="font-weight-bold">
 	${{ book.price }}
 		</span>
-   
+    <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
     <br>
     <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
     <a href="{% url 'reviews' book.id book.title %}">View Details and Reviews</a>
     <br>
     <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
-    <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+
     {% if user.is_authenticated %}
     <br> Add to Wishlists:
     <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}">#1</a>, 
