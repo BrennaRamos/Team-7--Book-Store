@@ -3,7 +3,6 @@
 {% load staticfiles %}
 
 
-
 <head>
     <style>
         p.ex1 {
@@ -22,14 +21,7 @@
             break-inside: avoid;
         }
 
-        .divbooks {
-          -webkit-column-count: 2; /* Chrome, Safari, Opera */
-          -moz-column-count: 2; /* Firefox */
-          column-count: 2;
-	  -webkit-column-break-inside: avoid;
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
+        
      
     </style>
 </head>
@@ -37,7 +29,7 @@
 
 
 <body>
-<div class="container">
+<div class="container-fluid">
 <center>
 <div class="row-fluid">
 <div class="span2">
@@ -65,11 +57,11 @@
         {% endif %}
     </span>
 	</blockquote>
+</div>
 
 
-<div class="divbooks">
 <div class="span10">
-{% for book in books %}
+{% for book in books|dictsort:"title" %}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
                 <p class="ex1">

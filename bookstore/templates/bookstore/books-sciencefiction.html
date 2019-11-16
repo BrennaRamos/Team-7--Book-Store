@@ -1,0 +1,108 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load staticfiles %}
+
+
+<head>
+    <style>
+        p.ex1 {
+          padding: 35px;
+        }
+
+        p.ex2 {
+          border: 1px solid grey;
+          margin-left: 35px;
+        }
+
+ 	li {
+            display: inline-block;
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        
+     
+    </style>
+</head>
+
+
+
+<body>
+<div class="container-fluid">
+<center>
+<div class="row-fluid">
+<div class="span2">
+<blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+    <button type="button">Sort by Title</button>
+    <button type="button">Sort by Author</button>
+    <button type="button">Sort by Price</button>
+    <button type="button">Sort by Rating</button>
+    <button type="button">Sort by Publish Date</button>
+
+    
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page={{ books.previous_page_number }}">Previous</a>
+        {% endif %}
+
+	
+        <span class="current">
+            (Page {{ books.number }} of {{ books.paginator.num_pages }})
+        </span>
+	
+
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+	</blockquote>
+</div>
+
+
+<div class="span10">
+{% for book in books|dictsort:"title" %}
+    <center>
+        <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
+                <p class="ex1">
+                    <img id="img_{{ forloop.counter }}" src="{{ book.photo.url }}" width=100 height=170>
+                    <br>
+                    <span class="font-weight-bold">
+                        {{ book.title }}
+                    </span>
+                    <br>
+                    by <a href="{% url 'authors' book.author.id %}"> {{ book.author }}</a>
+                    <br> {{ book.genre }}
+                    <br>
+                    Published on {{ book.datePublished }}
+                    <br>
+                    Average Rating: {{ book.aveRating }}
+                    <br>
+                    <span class="font-weight-bold">
+                        ${{ book.price }}
+                    </span>
+                    <a href="{% url 'addtocart' book.id %}?from={{request.path|urlencode}}">Add to Cart</a>
+                    <br>
+                    <!--CHECK REVIEWS LINK. Once clicked it redirects user to the reviews page for that specific book-->
+                    <a href="{% url 'reviews' book.id book.title %}">View Details and Reviews</a>
+                    <br>
+                    <!--ADD TO CART LINK. Once clicked it adds item to cart but "redirects" user to whatever page they were currently on/clicked from-->
+
+                    {% if user.is_authenticated %}
+                    <br> Add to Wishlists:
+                    <a href="{% url 'addtowish' book.id 0 %}?from={{request.path|urlencode}}">#1</a>,
+                    <a href="{% url 'addtowish' book.id 1 %}?from={{request.path|urlencode}}">#2</a>,
+                    <a href="{% url 'addtowish' book.id 2 %}?from={{request.path|urlencode}}">#3</a>
+                    {% endif %}
+                </p>
+        </blockquote>
+    </center>
+{% endfor %}
+{% endblock content %}
+</div>
+</div>
+</div>
+
+
+</div>
+</body>

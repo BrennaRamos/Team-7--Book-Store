@@ -39,7 +39,7 @@ class Book(models.Model):
 	aveRating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
 
 	class Meta:
-		ordering = ['title']
+		ordering = ['price']
 
 	def __str__(self):
 		return self.title
