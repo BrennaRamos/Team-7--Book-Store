@@ -26,12 +26,22 @@
     </style>
 </head>
 
-
-
 <body>
 <div class="container-fluid">
+
+
+<select name="forma" onchange="location = this.value;">
+ <option value="{% url 'bookstore-books' %}">Browse by Genre</option>
+ <option value="{% url 'bookstore-books' %}">All Results</option>
+ <option value="{% url 'Fantasy' %}">Fantasy</option>
+ <option value="{% url 'Horror' %}">Horror</option>
+ <option value="{% url 'Satire' %}">Satire</option>
+ <option value="{% url 'Sciencefiction' %}">Science Fiction</option>
+ <option value="{% url 'Thriller' %}">Thriller</option>
+ <option value="{% url 'Nonfiction' %}">Non Fiction</option>
+</select>
+
 <center>
-<div class="row-fluid">
 <div class="span2">
 <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
     <button type="button">Sort by Title</button>
