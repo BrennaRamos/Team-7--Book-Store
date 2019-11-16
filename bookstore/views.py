@@ -135,6 +135,23 @@ def Satire(request):
     #}
     return render(request,'bookstore/books-satire.html', {'books': books})
 
+def Bestsellers(request):
+    book_list = Book.objects.all().filter(publisher_id=6)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-bestsellers.html', {'books': books})
+
 
 
 def authors(request, id):

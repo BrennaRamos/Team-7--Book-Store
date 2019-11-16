@@ -31,8 +31,9 @@
 
 
 <select name="forma" onchange="location = this.value;">
- <option value="{% url 'bookstore-books' %}">Browse by Genre</option>
+ <option value="{% url 'bookstore-books' %}">Browse by...</option>
  <option value="{% url 'bookstore-books' %}">All Results</option>
+ <option value="{% url 'Bestsellers' %}">Best Sellers</option>
  <option value="{% url 'Fantasy' %}">Fantasy</option>
  <option value="{% url 'Horror' %}">Horror</option>
  <option value="{% url 'Satire' %}">Satire</option>
@@ -71,7 +72,7 @@
 
 
 <div class="span10">
-{% for book in books|dictsort:"title" %}
+{% for book in books%}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
                 <p class="ex1">
