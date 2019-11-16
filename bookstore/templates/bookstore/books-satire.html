@@ -33,6 +33,11 @@
 <select name="forma" onchange="location = this.value;">
  <option value="{% url 'bookstore-books' %}">Browse by...</option>
  <option value="{% url 'bookstore-books' %}">All Results</option>
+ <option value="{% url 'bookstore-booksrate1' %}">Rating 1+</option>
+ <option value="{% url 'bookstore-booksrate2' %}">Rating 2+</option>
+ <option value="{% url 'bookstore-booksrate3' %}">Rating 3+</option>
+ <option value="{% url 'bookstore-booksrate4' %}">Rating 4+</option>
+ <option value="{% url 'bookstore-booksrate5' %}">Rating 5+</option>
  <option value="{% url 'Bestsellers' %}">Best Sellers</option>
  <option value="{% url 'Fantasy' %}">Fantasy</option>
  <option value="{% url 'Horror' %}">Horror</option>

@@ -32,6 +32,91 @@ def books(request):
     #}
     return render(request,'bookstore/books.html', {'books': books})
 
+def booksrate1(request):
+    book_list = Book.objects.filter(aveRating__gte=1)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksrate1.html', {'books': books})
+
+def booksrate2(request):
+    book_list = Book.objects.filter(aveRating__gte=2)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksrate2.html', {'books': books})
+
+def booksrate3(request):
+    book_list = Book.objects.filter(aveRating__gte=3)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksrate3.html', {'books': books})
+
+def booksrate4(request):
+    book_list = Book.objects.filter(aveRating__gte=4)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksrate4.html', {'books': books})
+
+def booksrate5(request):
+    book_list = Book.objects.filter(aveRating__gte=5)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksrate5.html', {'books': books})
+
 def Fantasy(request):
     book_list = Book.objects.all().filter(genre_id=1)
     paginator = Paginator(book_list, 10)
@@ -571,8 +656,6 @@ def Bestsellersabcp(request):
     #    'title':'Books'
     #}
     return render(request,'bookstore/books-bestsellersabcp.html', {'books': books})
-
-
 
 
 def authors(request, id):

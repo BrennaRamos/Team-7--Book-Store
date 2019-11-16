@@ -4,6 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.home, name='bookstore-home'),
     path('books', views.books, name='bookstore-books'),
+    path('booksrate1', views.booksrate1, name='bookstore-booksrate1'),
+    path('booksrate2', views.booksrate2, name='bookstore-booksrate2'),
+    path('booksrate3', views.booksrate3, name='bookstore-booksrate3'),
+    path('booksrate4', views.booksrate4, name='bookstore-booksrate4'),
+    path('booksrate5', views.booksrate5, name='bookstore-booksrate5'),
     path('Fantasy', views.Fantasy, name='Fantasy'),
     path('Horror', views.Horror, name='Horror'),
     path('Nonfiction', views.Nonfiction, name='Nonfiction'),
