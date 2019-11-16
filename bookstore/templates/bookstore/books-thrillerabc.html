@@ -45,7 +45,7 @@
 <center>
 <div class="span2">
 <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
-    <a href="{% url 'Fantasyabc' %}" class="button">Sort by Title</a>
+    <a href="{% url 'Thriller' %}" class="button">Sort by Price</a>
 
     
     <span class="step-links">
@@ -68,7 +68,7 @@
 
 
 <div class="span10">
-{% for book in books%}
+{% for book in books|dictsort:"title" %}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
                 <p class="ex1">

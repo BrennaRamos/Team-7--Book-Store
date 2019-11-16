@@ -45,12 +45,7 @@
 <center>
 <div class="span2">
 <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
-    <button type="button">Sort by Title</button>
-    <button type="button">Sort by Author</button>
-    <button type="button">Sort by Price</button>
-    <button type="button">Sort by Rating</button>
-    <button type="button">Sort by Publish Date</button>
-
+    <a href="{% url 'Sciencefictionabc' %}" class="button">Sort by Title</a>
     
     <span class="step-links">
         {% if books.has_previous %}
@@ -72,7 +67,7 @@
 
 
 <div class="span10">
-{% for book in books%}
+{% for book in books|dictsort:"title" %}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
                 <p class="ex1">

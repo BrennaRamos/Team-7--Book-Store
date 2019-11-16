@@ -11,5 +11,13 @@ urlpatterns = [
     path('Thriller', views.Thriller, name='Thriller'),
     path('Satire', views.Satire, name='Satire'),
     path('Bestsellers', views.Bestsellers, name='Bestsellers'),
+    path('booksabc', views.booksabc, name='bookstore-booksabc'),
+    path('Fantasyabc', views.Fantasyabc, name='Fantasyabc'),
+    path('Horrorabc', views.Horrorabc, name='Horrorabc'),
+    path('Nonfictionabc', views.Nonfictionabc, name='Nonfictionabc'),
+    path('Sciencefictionabc', views.Sciencefictionabc, name='Sciencefictionabc'),
+    path('Thrillerabc', views.Thrillerabc, name='Thrillerabc'),
+    path('Satireabc', views.Satireabc, name='Satireabc'),
+    path('Bestsellersabc', views.Bestsellersabc, name='Bestsellersabc'),
     path('authors/<id>', views.authors, name='authors'),
 ]

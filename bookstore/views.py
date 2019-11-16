@@ -153,6 +153,144 @@ def Bestsellers(request):
     return render(request,'bookstore/books-bestsellers.html', {'books': books})
 
 
+def booksabc(request):
+    book_list = Book.objects.all()
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/booksabc.html', {'books': books})
+
+def Fantasyabc(request):
+    book_list = Book.objects.all().filter(genre_id=1)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-fantasyabc.html', {'books': books})
+
+def Horrorabc(request):
+    book_list = Book.objects.all().filter(genre_id=3)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-horrorabc.html', {'books': books})
+
+def Nonfictionabc(request):
+    book_list = Book.objects.all().filter(genre_id=7)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-nonfictionabc.html', {'books': books})
+
+def Sciencefictionabc(request):
+    book_list = Book.objects.all().filter(genre_id=2)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-sciencefictionabc.html', {'books': books})
+
+def Thrillerabc(request):
+    book_list = Book.objects.all().filter(genre_id=4)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-thrillerabc.html', {'books': books})
+
+
+def Satireabc(request):
+    book_list = Book.objects.all().filter(genre_id=8)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-satireabc.html', {'books': books})
+
+def Bestsellersabc(request):
+    book_list = Book.objects.all().filter(publisher_id=6)
+    paginator = Paginator(book_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    #context  = {
+    #    'books': Book.objects.all(),
+    #    'title':'Books'
+    #}
+    return render(request,'bookstore/books-bestsellersabc.html', {'books': books})
+
+
 
 def authors(request, id):
     author = get_object_or_404(Author, id=id)
