@@ -95,7 +95,7 @@
 
 	<div class="main-content-section">
 		{% if average_rating %}
-			<p class="ave-rating">Average Rating: {{ average_rating|floatformat:2 }}</p>
+			<p class="ave-rating">Average Rating: {{ average_rating|floatformat:1 }}</p>
 		{% endif %}
 
 		<h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>

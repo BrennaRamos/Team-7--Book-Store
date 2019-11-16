@@ -36,6 +36,7 @@ class Book(models.Model):
 	publisher = models.ForeignKey(Publisher, on_delete=models.SET('Default'))
 	price = models.DecimalField(max_digits=5, decimal_places=2)
 	photo = models.ImageField(upload_to="gallery")
+	aveRating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
 
 	class Meta:
 		ordering = ['title']
