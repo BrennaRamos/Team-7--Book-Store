@@ -46,7 +46,8 @@
 <div class="span2">
 <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
     <a href="{% url 'Fantasy' %}" class="button">Sort by Price</a>
-    
+    <a href="{% url 'Fantasyabcp' %}" class="button">Show 20 Results</a>    
+
     <span class="step-links">
         {% if books.has_previous %}
             <a href="?page={{ books.previous_page_number }}">Previous</a>

@@ -45,9 +45,9 @@
 <center>
 <div class="span2">
 <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
-    <a href="{% url 'Satireabc' %}" class="button">Sort by Title</a>
-    <a href="{% url 'Satirep' %}" class="button">Show 20 Results</a> 
-    
+    <a href="{% url 'Sciencefictionabc' %}" class="button">Sort by Title</a>
+    <a href="{% url 'Sciencefiction' %}" class="button">Show 10 Results</a>     
+
     <span class="step-links">
         {% if books.has_previous %}
             <a href="?page={{ books.previous_page_number }}">Previous</a>
@@ -68,7 +68,7 @@
 
 
 <div class="span10">
-{% for book in books%}
+{% for book in books|dictsort:"title" %}
     <center>
         <blockquote class="blockquote" style="background-color:#f2f2f2;border-radius: 15px;padding:2px;">
                 <p class="ex1">
