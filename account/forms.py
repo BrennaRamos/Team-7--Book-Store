@@ -19,5 +19,4 @@ class accountUpdateForm(forms.ModelForm):
 class profileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profilePic']
-        
+        fields = ['address','city','state','zipCode','profilePic']

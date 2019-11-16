@@ -8,18 +8,39 @@
                 <div class="col-lg-3">
                     <img class="img-fluid" src="{{ user.profile.profilePic.url }}" alt="Card image cap">
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-5">
                     <div class="card-body">
                         <h4>{{ user.username }}</h4>
                         <p>Email: {{ user.email }}</p>
                         <p>Name: {{ user.first_name}} {{user.last_name}}</p>
+                        <p>Address: {{ user.profile.address}} {{user.profile.city}} {{user.profile.state}} {{user.profile.zipCode}}</p>
                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Edit profile
+                            Edit profile 
                         </button>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                        <div class="card-body">
+                            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
+                                Credit Cards
+                            </button>
+                            <br>
+                            <br>
+                            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseAddress" aria-expanded="false" aria-controls="collapseAddress">
+                                Shipping Addresses
+                            </button>
+                        </div>
+                    </div>
             </div>
         </div>
+        <div class="card collapse mb-3" id="collapseCard">
+            <div class="card-body">
+            </div>
+        </div>
+        <div class="card collapse mb-3" id="collapseAddress">
+                <div class="card-body">
+                </div>
+            </div>
 
         <div class="card collapse mb-3" id="collapseExample">
             <div class="card-body">
