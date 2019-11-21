@@ -16,19 +16,23 @@ class WishlistNameList(ListView):
         return WishlistEntrie.objects.all()
 
 def rename_wish(request):
-    wish_names_instance = get_object_or_404(WishlistName, pk=1)
+    wish_names_instance = WishlistName.objects.all().filter(username = request.user.username).first()
     if request.method == 'POST':
-        form = WishlistNameForm(request.POST)
-        wish_names_instance.wish_list_name_0 = request.POST['wishlist_1']
-        wish_names_instance.wish_list_name_1 = request.POST['wishlist_2']
-        wish_names_instance.wish_list_name_2 = request.POST['wishlist_3']
+        form = WishlistNameForm(request.POST, instance = wish_names_instance)
+        if form.is_valid():
+            wish_names_instance.save()
         return HttpResponseRedirect('wishlist/home.html')
 
     else:
-        form = WishlistNameForm()
+        form = WishlistNameForm(instance = wish_names_instance)
+
+    context = {
+        'WishlistNameForm':WishlistNameForm,
+        'wish_names_instance':wish_names_instance
+    }
         
     
-    return render(request, 'wishlist/home.html', {'form' : form})
+    return render(request, 'wishlist/home.html', context)
 
 def add_wish(request, book_id, homeNum):
 
