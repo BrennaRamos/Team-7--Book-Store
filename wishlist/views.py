@@ -21,7 +21,7 @@ def rename_wish(request):
         form = WishlistNameForm(request.POST, instance = wish_names_instance)
         if form.is_valid():
             wish_names_instance.save()
-        return HttpResponseRedirect('wishlist/home.html')
+        return redirect('wishlists')
 
     else:
         form = WishlistNameForm(instance = wish_names_instance)
