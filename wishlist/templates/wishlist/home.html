@@ -1,5 +1,14 @@
 
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-	<h2>Wishlist homei!</h2>
+  <h2>Wishlist Name Editor!</h2>
+
+<form method="POST" endctype="multipart/form-data">
+{% csrf_token %}
+    {{ WishlistNameForm|crispy }}
+<button class="btn btn-success mb-3" type="submit">Update</button>
+</form>
+    
+    
 {% endblock content %}
