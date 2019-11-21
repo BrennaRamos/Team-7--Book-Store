@@ -4,9 +4,9 @@ from django.apps import apps
 # Create your models here.
 class WishlistName(models.Model):
     username = models.CharField(max_length=150, help_text='Username here',  primary_key=True)
-    wish_list_name_0 = models.CharField(max_length=20, help_text='Enter name for wishlist', default='Wishlist')
-    wish_list_name_1 = models.CharField(max_length=20, help_text='Enter name for wishlist', null=True, blank=True)
-    wish_list_name_2 = models.CharField(max_length=20, help_text='Enter name for wishlist', null=True, blank=True)
+    wish_list_name_0 = models.CharField(max_length=20, help_text='Enter name for main wishlist', default='Wishlist')
+    wish_list_name_1 = models.CharField(max_length=20, help_text='Enter name for wishlist, or leave blank to remove', null=True, blank=True)
+    wish_list_name_2 = models.CharField(max_length=20, help_text='Enter name for wishlist, or leave blank to remove', null=True, blank=True)
 
 
     def __str__(self):
