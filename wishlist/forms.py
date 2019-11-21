@@ -1,6 +1,10 @@
 from django import forms
+from .models import WishlistName
     
-class WishlistNameForm(forms.Form):
-    wishlist_1 = forms.CharField(help_text="Enter a name for your primary wishlist.", max_length = 20)
-    wishlist_2 = forms.CharField(help_text="Enter a name for your 2nd wishlist.", max_length = 20, required = False)
-    wishlist_3 = forms.CharField(help_text="Enter a name for your 3rd wishlist.", max_length = 20, required = False)
+class WishlistNameForm(forms.ModelForm):
+    #wishlist_1 = forms.CharField()
+    #wishlist_2 = forms.CharField()
+    #wishlist_3 = forms.CharField()
+    class Meta:
+        model = WishlistName
+        fields = ['wish_list_name_0','wish_list_name_1','wish_list_name_2']
