@@ -16,10 +16,15 @@ class WishlistNameList(ListView):
         return WishlistEntrie.objects.all()
 
 def rename_wish(request):
-    wish_names_instance = WishlistName.objects.all().filter(username = request.user.username).first()
+    wish_names_instance = WishlistName.objects.all().filter(username = request.user).first()
+    if wish_names_instance:
+        form = WishlistNameForm(request.POST or None, initial={'wish_list_name_0': wish_names_instance.wish_list_name_0, 'wish_list_name_1': wish_names_instance.wish_list_name_1, 'wish_list_name_2': wish_names_instance.wish_list_name_2})
+
     if request.method == 'POST':
-        form = WishlistNameForm(request.POST, instance = wish_names_instance)
         if form.is_valid():
+            wish_names_instance.wish_list_name_0 = request.POST.get('wish_list_name_0')
+            wish_names_instance.wish_list_name_1 = request.POST.get('wish_list_name_1')
+            wish_names_instance.wish_list_name_2 = request.POST.get('wish_list_name_2')
             wish_names_instance.save()
         return redirect('wishlists')
 
@@ -27,7 +32,7 @@ def rename_wish(request):
         form = WishlistNameForm(instance = wish_names_instance)
 
     context = {
-        'WishlistNameForm':WishlistNameForm,
+        'WishlistNameForm':form,
         'wish_names_instance':wish_names_instance
     }
         
