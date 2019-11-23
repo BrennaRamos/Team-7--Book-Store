@@ -106,7 +106,10 @@ def deleteReview(request, id):
         book = get_object_or_404(Book, id=review.book.id)
         reviews = Review.objects.filter(book=book).order_by('-num_likes')
         average_rating = reviews.aggregate(average=Avg('rating'))
-        book.aveRating = average_rating['average']
+        if average_rating['average']:
+            book.aveRating = average_rating['average']
+        else:
+            book.aveRating = 0;
         book.save()
         return HttpResponseRedirect('/reviews/%s/%s' % (review.book.id, review.book.title))
     elif request.GET.get('Cancel') == 'Cancel':
