@@ -20,6 +20,12 @@ def rename_wish(request):
     if wish_names_instance:
         form = WishlistNameForm(request.POST or None, initial={'wish_list_name_0': wish_names_instance.wish_list_name_0, 'wish_list_name_1': wish_names_instance.wish_list_name_1, 'wish_list_name_2': wish_names_instance.wish_list_name_2})
 
+    if not wish_names_instance:
+        newNames = WishlistName(username = request.user.username)
+        newNames.save()
+        wish_names_instance = newNames
+        form = WishlistNameForm(request.POST or None, initial={'wish_list_name_0': wish_names_instance.wish_list_name_0, 'wish_list_name_1': wish_names_instance.wish_list_name_1, 'wish_list_name_2': wish_names_instance.wish_list_name_2})
+
     if request.method == 'POST':
         if form.is_valid():
             wish_names_instance.wish_list_name_0 = request.POST.get('wish_list_name_0')
@@ -60,3 +66,4 @@ def del_wish(request, entrie_id):
     trashEntrie = WishlistEntrie.objects.get(id = entrie_id)
     trashEntrie.delete()
     return redirect(request.GET.get('from'))
+        

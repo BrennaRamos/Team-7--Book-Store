@@ -3,6 +3,7 @@
 {% block content %}
 {% if user.is_authenticated %}
   <h2>Wishlist view!</h2>
+<a href="{% url 'rename_wish' %}?from={{request.path|urlencode}}"><i class="material-icons" style="float:right;">edit</i></a> <font style="font-size:10px;color:red">(click blue pencil on right to create or rename lists)</font>
     <ol>
         {% for wishlistname in object_list %}
 	{% if wishlistname.username == user.username %}<p>
@@ -18,7 +19,7 @@
                     {% endif %}
                 {% endfor %}</ul></li></p><br><br>
 
-            {% if wishlistname.wish_list_name_1 != null %}<p>
+            {% if wishlistname.wish_list_name_1 != null and wishlistname.wish_list_name_1 != '' %}<p>
                 <li><h5>{{ wishlistname.wish_list_name_1 }}</h5><ul class="list-group">
                 {% for wishlistentrie in view.entries %}
                     {% if wishlistentrie.home == '1' and user.username == wishlistentrie.username %}
@@ -32,7 +33,7 @@
                 {% endfor %}</ul></li></p><br><br>
             {% endif %}
 
-            {% if wishlistname.wish_list_name_2 != null %}<p>
+            {% if wishlistname.wish_list_name_2 != null and wishlistname.wish_list_name_2 != '' %}<p>
                 <li><h5>{{ wishlistname.wish_list_name_2 }}</h5><ul class="list-group">
                 {% for wishlistentrie in view.entries %}
                     {% if wishlistentrie.home == '2' and user.username == wishlistentrie.username %}
