@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_extensions',
     'account.apps.AccountConfig',
     'crispy_forms',
     'wishlist.apps.WishlistConfig',
